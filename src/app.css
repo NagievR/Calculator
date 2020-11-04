@@ -1,0 +1,16 @@
+#app {
+  /* min-width: 334px; */
+  width: 334px;
+
+  /* min-height: 334px; */
+  height: 590px;
+
+  border: 1px #b3b2b2 solid;
+  background-color: #EBEBEB;
+  border-radius: 3px;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
