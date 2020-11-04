@@ -1,0 +1,10 @@
+#key, #clear-key {
+  width: 80px;
+  height: 80px;
+  background-color: blueviolet;
+  margin-right: 2px;
+}
+
+#clear-key {
+  width: 160px;
+}
