@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './number-pad.css';
+import './keyboard.css';
 import {KeysRow} from './keys-row/keys-row.js'
 import {Key} from './single-keys/key.js'
 import {LongerKey} from './single-keys/longer-key.js'
 
-export function NumberPad() {
+export function Keyboard() {
   return ( 
     <div id='number-pad'>
       <KeysRow>
