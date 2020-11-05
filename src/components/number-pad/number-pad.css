@@ -1,8 +1,6 @@
 #number-pad {
   width: 326px;
   height: 408px;
-  /* background-color: burlywood; */
-
   display: flex;
   flex-wrap: wrap;
 }
