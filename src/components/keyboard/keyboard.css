@@ -1,6 +1,7 @@
-#number-pad {
+#keyboard {
   width: 326px;
   height: 408px;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 4px;
 }

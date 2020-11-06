@@ -6,7 +6,7 @@ import {Key} from './single-keys/key.js'
 
 export function Keyboard() {
   return ( 
-    <div id='number-pad'>
+    <div id='keyboard'>
       <KeysRow>
         <Key value={'c'} className={'key double-key'} />
         <Key value={'⌫'} className={'key delete'}  />
