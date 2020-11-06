@@ -3,13 +3,12 @@ import React from 'react';
 import './keyboard.css';
 import {KeysRow} from './keys-row/keys-row.js'
 import {Key} from './single-keys/key.js'
-import {LongerKey} from './single-keys/longer-key.js'
 
 export function Keyboard() {
   return ( 
     <div id='number-pad'>
       <KeysRow>
-        <LongerKey value={'c'} className={'key double-key'} />
+        <Key value={'c'} className={'key double-key'} />
         <Key value={'⌫'} className={'key delete'}  />
         <Key value={'÷'} className={'key math-operator'} />
       </KeysRow>
