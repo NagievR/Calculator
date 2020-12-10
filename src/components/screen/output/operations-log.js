@@ -1,18 +1,23 @@
-import {React} from 'react';
+import {React, useState, useEffect, useRef} from 'react';
 
 import './output.css';
 
-export function OperationsLog() {
-  // const [isOversized, set] useState(false);
+export function OperationsLog({setJournalToggle, displayWidth}) {
+  const [isOversized, setIsOversized] = useState(false);
+  const [expr, setExpr] = useState('25656');
+  const ref = useRef();
 
-  function changeHandler(e) {
-    console.dir(e.target);
-  }
+  useEffect(() => {
+    if (ref.current.offsetWidth > displayWidth) {
+      setIsOversized(true);
+      setJournalToggle(true);
+    } // eslint-disable-next-line
+  }, [expr])
 
   return (
-    <div className='log-margin'>
-      <div className='output-elem-wrap oversized'>
-        <span onClick={changeHandler} id='log'>98*87/71/4/4*-5+22+98-9*866-22+98-9-87+835-11</span>
+    <div className='log-margin-bottom'>
+      <div className={`output-elem-wrap ${isOversized ? 'oversized' : ''}`}>
+        <span ref={ref} onClick={() => setExpr(prev => prev + Math.round(Math.random() * 10))} id='log'>{expr}</span>
       </div>
     </div>
   );

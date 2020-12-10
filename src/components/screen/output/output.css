@@ -1,4 +1,4 @@
-#container {
+#output-container {
   margin-right: 5px;
   overflow: hidden;
   white-space: nowrap;  
@@ -7,11 +7,13 @@
 #log {
   color: #7A7A7A;
   font-size: 22px;
-  
+  height: 27px;
 }
 
 #result {
-  font-size: 72px;
+  /* font-size: 72px; */
+  font-size: 10vh;
+  line-height: 10vh;
 }
 
 .output-elem-wrap {
@@ -24,6 +26,6 @@
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(236,233,233) 7%);
 }
 
-.log-margin {
+.log-margin-bottom {
   margin-bottom: 35px;
 }

@@ -1,9 +1,8 @@
-import React from 'react';
-import {useState} from 'react';
+import {React, useState} from 'react';
 
 import './journal-toggle.css';
 
-export function JournalToggle() {
+export function JournalToggle({toggleJournal}) {
   const show = '▲';
   const hide = '×';
   const [iconToShow, setIcon] = useState(show);
@@ -11,11 +10,10 @@ export function JournalToggle() {
   function toggle(e) {
     const icn = e.target.textContent === show ? hide : show;
     setIcon(icn);
+    toggleJournal(prev => !prev);
   }
 
   return (
-    <div id='journal-toggle-wrap' onClick={toggle}>
-      <button id='toggle-btn'>{iconToShow}</button>
-    </div>
+    <button id='toggle-btn' onClick={toggle}>{iconToShow}</button>
   );
 }

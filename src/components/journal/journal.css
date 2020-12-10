@@ -1,0 +1,21 @@
+#journal-container {
+  position: absolute;
+  height: 413px;
+  width: 334px;
+  background-color: #333333;
+  opacity: 0.97;
+  bottom: 0px; /* -415px */
+  z-index: 999;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: #EBEBEB;
+  font-size: 26px;
+  transition: .9s;
+}
+
+#journal {
+  max-height: 100%;
+  overflow-y: auto;
+  word-wrap: break-word;
+  padding: 0 10px;
+}
