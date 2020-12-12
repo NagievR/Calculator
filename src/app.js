@@ -5,15 +5,14 @@ import {Screen} from './components/screen/screen.js';
 import {Keyboard} from './components/keyboard/keyboard.js';
 import {Journal} from './components/journal/journal.js';
 
-
 export function App() {
-  const [toggleJournal, setToggleJournal] = useState(false);
+  const [journalDisplaying, setJournalDisplaying] = useState(false);
 
   return (
     <div id='app'>
-      <Screen toggleJournal={setToggleJournal} />
+      <Screen setJournalDisplaying={setJournalDisplaying} />
       <Keyboard />
-      <Journal display={toggleJournal} />
+      <Journal display={journalDisplaying} />
     </div>
-  )
+  );
 }
