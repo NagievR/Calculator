@@ -2,18 +2,20 @@ import {React, useState} from 'react';
 
 import './journal-switcher.css';
 
-export function JournalSwitcher({ displaying, toggleJournal }) {
+export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
   const show = '▲';
   const hide = '×';
-  const [iconToShow, setIcon] = useState(show);
+  const [iconToShow, setIconToShow] = useState(show);
 
   function toggleIcon(e) {
-    setIcon( e.target.textContent === show ? hide : show );
-    // toggleJournal(prev => !prev);
+    setIconToShow( e.target.textContent === show ? hide : show );
+    setJournalDisplaying(prev => !prev);
   }
 
   function toggleDisplaying() {
-    return displaying ? {top: 0} : {top: '-30px'};
+    const hide = '-30px';
+    const show = '0';
+    return switcherDisplaying ? {top: show} : {top: hide};
   }
 
   return (
