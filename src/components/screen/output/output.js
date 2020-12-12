@@ -4,7 +4,7 @@ import './output.css';
 import {OperationsLog} from './operations-log.js'; 
 import {Result} from './result.js';
 
-export function Output({setJournalToggle}) {
+export function Output({ setJournalToggle }) {
   const displayWidth = 315;
 
   return (

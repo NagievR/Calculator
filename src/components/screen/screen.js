@@ -1,18 +1,25 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 
 import './screen.css';
-import {JournalToggle} from './journal-toggle/journal-toggle.js';
+import {JournalSwitcher} from './journal-switcher/journal-switcher.js';
 import {Output} from './output/output.js';
 
 export function Screen({toggleJournal}) {
-  const [displayBtn, setDisplayBtn] = useState(true);
+  const [switcherDisplaying, setSwitcherDisplaying] = useState(true);
+
+  // useEffect(() => {
+  //   const timerId = setInterval(() => {
+  //     setSwitcherDisplaying(prev => !prev);
+  //     console.log(123)
+  //   }, 2000);
+
+  //   return () => clearInterval(timerId);
+  // });
 
   return (
     <div id='screen'>
-      <div id='journal-toggle-wrap'>
-        {displayBtn && <JournalToggle toggleJournal={toggleJournal} />}
-      </div>
-      <Output setJournalToggle={setDisplayBtn} />
+      <JournalSwitcher displaying={switcherDisplaying} toggleJournal={toggleJournal} />
+      <Output setSwitcherDisplaying={setSwitcherDisplaying} />
     </div>
   );
 }

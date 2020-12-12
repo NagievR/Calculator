@@ -2,10 +2,3 @@
   width: 320px;
   height: 183px;
 }
-
-#journal-toggle-wrap {
-  display: flex;
-  justify-content: center;
-  height: 28px;
-  margin-bottom: 7px;
-}

@@ -1,0 +1,25 @@
+.key, .double-key {
+  width: 80px;
+  height: 80px;
+  background-color: #C4C4C4;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  border-radius: 3px;
+}
+
+.double-key {
+  width: 162px;
+}
+
+.math-operator {
+  background-color: #FF8C00;
+  color: #F1F1F1;
+}
+
+.delete {
+  font-size: 24px;
+}
