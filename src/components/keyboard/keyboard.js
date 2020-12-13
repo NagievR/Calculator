@@ -2,7 +2,7 @@ import React from 'react';
 
 import './keyboard.css';
 import {KeysRow} from './keys-row/keys-row.js'
-import {Key} from './single-keys/key.js'
+import {Key} from './single-key/key.js'
 
 export function Keyboard() {
   return ( 
