@@ -2,7 +2,7 @@ import {React, useRef, useState, useEffect} from 'react';
 
 import './output.css';
 
-export function Result({setJournalToggle, displayWidth}) {
+export function Result({ displayWidth }) {
   const [isOversized, setIsOversized] = useState(false);
   const [number, setNumber] = useState('0');
   const resRef = useRef();
@@ -10,7 +10,7 @@ export function Result({setJournalToggle, displayWidth}) {
   useEffect(() => {
     if (resRef.current.offsetWidth > displayWidth) {
       setIsOversized(true);
-      // setJournalToggle(true);
+
     } // eslint-disable-next-line
   }, [number]);
 
