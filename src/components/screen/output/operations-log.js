@@ -4,7 +4,7 @@ import './output.css';
 
 export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
   const [isOversized, setIsOversized] = useState(false);
-  const [expr, setExpr] = useState('256465465465465465464465556');
+  const [expr, setExpr] = useState('25646465465465464465556');
   const ref = useRef();
 
   useEffect(() => {
@@ -15,8 +15,9 @@ export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
       setIsOversized(false);
       setSwitcherDisplaying(false);
     }
-  }, [expr, setSwitcherDisplaying, displayWidth])
+  }, [expr, setSwitcherDisplaying, displayWidth]);
 
+  // *********************** FOR TESTING ***********************
   useEffect(() => {
     document.addEventListener('keydown', e => {
       if (e.key === 'b' && e.ctrlKey) {
@@ -24,6 +25,7 @@ export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
       }
     });
   }, []);
+  // *********************** FOR TESTING ***********************
 
   return (
     <div className='log-margin-bottom'>
