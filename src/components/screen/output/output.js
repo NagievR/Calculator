@@ -15,7 +15,6 @@ export function Output({ setSwitcherDisplaying }) {
       />
       <Result 
         displayWidth={displayWidth} 
-        // setSwitcherDisplaying={setSwitcherDisplaying} 
       />
     </div>
   );
