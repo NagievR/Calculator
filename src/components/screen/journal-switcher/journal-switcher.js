@@ -1,14 +1,22 @@
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 
 import './journal-switcher.css';
 
 export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
-  const show = '▲';
-  const hide = '×';
-  const [iconToShow, setIconToShow] = useState(show);
+  const showIcon = '▲';
+  const hideIcon = '×';
+  const [iconToShow, setIconToShow] = useState(showIcon);
+
+  // eslint-disable-next-line
+  useEffect(() => {
+    if (!switcherDisplaying) {
+      setIconToShow(showIcon);
+      setJournalDisplaying(false);
+    } 
+  });
 
   function toggleIcon(e) {
-    setIconToShow( e.target.textContent === show ? hide : show );
+    setIconToShow( e.target.textContent === showIcon ? hideIcon : showIcon );
     setJournalDisplaying(prev => !prev);
   }
 

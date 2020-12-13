@@ -10,7 +10,7 @@ export function Result({setJournalToggle, displayWidth}) {
   useEffect(() => {
     if (resRef.current.offsetWidth > displayWidth) {
       setIsOversized(true);
-      setJournalToggle(true);
+      // setJournalToggle(true);
     } // eslint-disable-next-line
   }, [number]);
 

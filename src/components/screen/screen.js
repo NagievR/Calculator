@@ -1,11 +1,11 @@
-import {React, useState, useEffect} from 'react';
+import {React, useState} from 'react';
 
 import './screen.css';
 import {JournalSwitcher} from './journal-switcher/journal-switcher.js';
 import {Output} from './output/output.js';
 
-export function Screen({toggleJournal}) {
-  const [switcherDisplaying, setSwitcherDisplaying] = useState(true);
+export function Screen({ setJournalDisplaying }) {
+  const [switcherDisplaying, setSwitcherDisplaying] = useState(false);
 
   // useEffect(() => {
   //   const timerId = setInterval(() => {
@@ -18,8 +18,13 @@ export function Screen({toggleJournal}) {
 
   return (
     <div id='screen'>
-      <JournalSwitcher displaying={switcherDisplaying} toggleJournal={toggleJournal} />
-      <Output setSwitcherDisplaying={setSwitcherDisplaying} />
+      <JournalSwitcher 
+        switcherDisplaying={switcherDisplaying}
+        setJournalDisplaying={setJournalDisplaying}  
+      />
+      <Output 
+        setSwitcherDisplaying={setSwitcherDisplaying}
+      />
     </div>
   );
 }
