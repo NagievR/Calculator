@@ -10,8 +10,7 @@
   color: #333333;
   font-size: 22px;
   font-weight: bold;
-  transition: 350ms;
-  top: -30px;
+  transition: 400ms;
 }
 
 #switcher-btn:hover {
