@@ -8,9 +8,37 @@ export function useValueHandler() {
 }
 
 export function ValueHandlerProvider({ children }) {
+  const [currNum, setCurrNum] = useState('0');
+
+  function handleValue(v) {
+    console.log(v);
+    // console.log(isNaN(v));
+    
+    if (!isNaN(v)) {
+      setCurrNum(prevNum => prevNum += v);
+    } else {
+      setCurrNum('0');
+    }
+
+    // switch(v) {
+    //   // handle symbols
+    //   // ...
+
+    //   case 
+    // }
+
+    // console.log(currNum);
+
+    return 
+  }
+
+  const context = {
+    handleValue,
+    currNum,
+  };
 
   return (
-    <Context.Provider value={{}}>
+    <Context.Provider value={context}>
       {children}
     </Context.Provider>
   );
