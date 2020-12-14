@@ -18,7 +18,7 @@ export function Result({ displayWidth }) {
     if (number.length < maxNumberLength) {
       return setNumber(prev => prev + Math.round(Math.random() * 10));
     } else {
-      alert('Maximum number seize!');
+      alert('Maximum number seize!'); 
     }
   }
 
