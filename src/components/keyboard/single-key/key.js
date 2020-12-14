@@ -1,10 +1,14 @@
 import React from 'react';
-import './key.css';
 
-export function Key(props) {
+import './key.css';
+import { useValueHandler } from "../../../logic/value-handler.js";
+
+export function Key ({ value, className }) {
+  const { handleValue } = useValueHandler();
+
   return (
-    <div onClick={() => console.log(props.value)} className={props.className}>
-      {props.value}
+    <div onClick={() => handleValue(value)} className={className}>
+      {value}
     </div>
   );
-} 
+}
