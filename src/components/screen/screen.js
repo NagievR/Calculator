@@ -3,6 +3,8 @@ import {React, useState} from 'react';
 import './screen.css';
 import {JournalSwitcher} from './journal-switcher/journal-switcher.js';
 import {Output} from './output/output.js';
+import { useValueHandler } from "../../logic/value-handler.js";
+
 
 export function Screen({ setJournalDisplaying }) {
   const [switcherDisplaying, setSwitcherDisplaying] = useState(false);
@@ -15,6 +17,9 @@ export function Screen({ setJournalDisplaying }) {
 
   //   return () => clearInterval(timerId);
   // });
+
+  const c = useValueHandler();
+  console.log(c);
 
   return (
     <div id='screen'>
