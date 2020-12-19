@@ -1,9 +1,9 @@
-import {React, useState} from 'react';
+import { React, useState } from 'react';
 
 import './screen.css';
-import {JournalSwitcher} from './journal-switcher/journal-switcher.js';
-import {Output} from './output/output.js';
-import { useValueHandler } from "../../logic/value-handler.js";
+import { JournalSwitcher } from './journal-switcher/journal-switcher.js';
+import { Output } from './output/output.js';
+import { useInputHandler } from "../../logic/input-handler.js";
 
 
 export function Screen({ setJournalDisplaying }) {
@@ -18,7 +18,7 @@ export function Screen({ setJournalDisplaying }) {
   //   return () => clearInterval(timerId);
   // });
 
-  const c = useValueHandler();
+  const c = useInputHandler();
   console.log(c);
 
   return (

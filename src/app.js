@@ -4,18 +4,18 @@ import './app.css';
 import { Screen } from './components/screen/screen.js';
 import { Keyboard } from './components/keyboard/keyboard.js';
 import { Journal } from './components/journal/journal.js';
-import { ValueHandlerProvider } from "./logic/value-handler.js";
+import { InputHandlerProvider } from "./logic/input-handler.js";
 
 export function App() {
   const [journalDisplaying, setJournalDisplaying] = useState(false);
 
   return (
-    <ValueHandlerProvider>
+    <InputHandlerProvider>
       <div id='app'>
         <Screen setJournalDisplaying={setJournalDisplaying} />
         <Keyboard />
         <Journal display={journalDisplaying} />
       </div>
-    </ValueHandlerProvider>
+    </InputHandlerProvider>
   );
 }

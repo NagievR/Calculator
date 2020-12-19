@@ -1,17 +1,15 @@
-import React from 'react';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 const Context = React.createContext();
 
-export function useValueHandler() {
+export function useInputHandler() {
   return useContext(Context);
 }
 
-export function ValueHandlerProvider({ children }) {
+export function InputHandlerProvider({ children }) {
   const [currNum, setCurrNum] = useState('0');
 
-  function handleValue(v) {
-    console.log(v);
+  function handleInput(v) {
     // console.log(isNaN(v));
     
     if (!isNaN(v)) {
@@ -33,7 +31,7 @@ export function ValueHandlerProvider({ children }) {
   }
 
   const context = {
-    handleValue,
+    handleInput,
     currNum,
   };
 
