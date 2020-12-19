@@ -8,13 +8,16 @@ export function Result({ displayWidth }) {
   const resRef = useRef();
 
   useEffect(() => {
+    const percentDecrease = 1.18;
     if (resRef.current.offsetWidth >= displayWidth) {
-      setFontSize(prev => prev /= 1.18);
+      setFontSize(prev => prev /= percentDecrease);
     } 
   }, [number, displayWidth]);
 
   function addNumberTest() {
-    const maxNumberLength = 17;
+    console.log(Number.MAX_SAFE_INTEGER)
+
+    const maxNumberLength = 21;
     if (number.length < maxNumberLength) {
       return setNumber(prev => prev + Math.round(Math.random() * 10));
     } else {
