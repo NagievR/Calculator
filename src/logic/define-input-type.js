@@ -9,7 +9,9 @@ export function useDefineInputType() {
 }
 
 export function DefineInputTypeProvider({ children }) {
-  const { addNumber, addOperator } = useStore();
+  const { 
+    operatorHandler, 
+    currentNumberHandler, } = useInputHandlers();
 
   const operatorsAction = {
     '÷': {value: '/', priority: 2, doCalc: (a, b) => a / b },
@@ -20,12 +22,12 @@ export function DefineInputTypeProvider({ children }) {
 
   function defineInputType(value) {
     if (!isNaN(value)) {
-      addNumber(value);
+      currentNumberHandler(value);
       return;
     } 
 
     if (operatorsAction[value]) {
-      addOperator( operatorsAction[value] );
+      operatorHandler( operatorsAction[value] );
       return;
     }
 

@@ -17,9 +17,20 @@ export function StoreProvider({ children }) {
   }
 
   const context = {
-    addNumber: setNumbers,
-    addOperator: setOperators,
+    currentNumber,
+    setCurrentNumber,
+    setNumbers,
+    setOperators,
   };
+
+  // console.log('*******************');
+  // console.log('currentNumber:\n');
+  // console.log(currentNumber)
+  // console.log('operators:\n');
+  // console.log(operators.current);
+  // console.log('numbers:\n');
+  // console.log(numbers)
+  // console.log('*******************');
 
   return (
     <Context.Provider value={context}>
