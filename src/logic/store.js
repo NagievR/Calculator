@@ -11,8 +11,14 @@ export function StoreProvider({ children }) {
   const operators = useRef([]);
   const [currentNumber, setCurrentNumber] = useState('0');
 
+  function setOperators(op) {
+    const prevArr = operators.current;
+    operators.current = prevArr.concat(op);
+  }
+
   const context = {
-    
+    addNumber: setNumbers,
+    addOperator: setOperators,
   };
 
   return (
