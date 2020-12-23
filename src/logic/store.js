@@ -9,7 +9,7 @@ export function useStore() {
 export function StoreProvider({ children }) {
   const [numbers, setNumbers] = useState([]);
   const operators = useRef([]);
-  const [currentNumber, setCurrentNumber] = useState('0');
+  const [currentNumber, setCurrentNumber] = useState('');
 
   function setOperators(op) {
     const prevArr = operators.current;
