@@ -1,35 +1,43 @@
 import {React, useRef, useState, useEffect} from 'react';
 
 import './output.css';
+import { useStore } from "../../../logic/store.js";
 
 export function Result({ displayWidth }) {
+  const initialFontSize = 80;
   const [number, setNumber] = useState('0');
-  const [fontSize, setFontSize] = useState(80);
+  const [fontSize, setFontSize] = useState(initialFontSize);
+  const { currentNumber } = useStore();
   const resRef = useRef();
 
   useEffect(() => {
     const percentDecrease = 1.18;
+
+    console.log(resRef.current.offsetWidth, displayWidth);
+    console.log(fontSize)
+
     if (resRef.current.offsetWidth >= displayWidth) {
-      setFontSize(prev => prev /= percentDecrease);
-    } 
+      console.log('shut up');
+      setFontSize( prev => prev /= percentDecrease );
+    } else if (null) {
+      
+    }
   }, [number, displayWidth]);
-
-  function addNumberTest() {
-    console.log(Number.MAX_SAFE_INTEGER)
-
+  
+  useEffect(() => {
+    // String(Number.MAX_SAFE_INTEGER).length;
     const maxNumberLength = 21;
     if (number.length < maxNumberLength) {
-      return setNumber(prev => prev + Math.round(Math.random() * 10));
+      setNumber(currentNumber);
     } else {
       alert('Maximum number seize!'); 
     }
-  }
+  }, [number, currentNumber]);
 
   return (
     <div className={`output-elem-wrap`}> 
       <span 
         style={{fontSize: fontSize}}
-        onClick ={addNumberTest}
         ref={resRef} 
         id='result'>
         {number}
