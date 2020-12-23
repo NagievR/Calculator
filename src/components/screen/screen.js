@@ -3,7 +3,7 @@ import { React, useState } from 'react';
 import './screen.css';
 import { JournalSwitcher } from './journal-switcher/journal-switcher.js';
 import { Output } from './output/output.js';
-import { useInputHandler } from "../../logic/input-handler.js";
+// import { useDefineInputType } from "../../logic/define-input-type.js";
 
 
 export function Screen({ setJournalDisplaying }) {
@@ -18,8 +18,8 @@ export function Screen({ setJournalDisplaying }) {
   //   return () => clearInterval(timerId);
   // });
 
-  const c = useInputHandler();
-  console.log(c);
+  // const c = useDefineInputType();
+  // console.log(c);
 
   return (
     <div id='screen'>

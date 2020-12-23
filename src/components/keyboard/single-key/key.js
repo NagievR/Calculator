@@ -1,13 +1,13 @@
 import React from 'react';
 
 import './key.css';
-import { useInputHandler } from "../../../logic/input-handler.js";
+import { useDefineInputType } from "../../../logic/define-input-type.js";
 
 export function Key ({ value, className }) {
-  const { handleInput } = useInputHandler();
+  const { defineInputType } = useDefineInputType();
 
   return (
-    <div onClick={() => handleInput(value)} className={className}>
+    <div onClick={() => defineInputType(value)} className={className}>
       {value}
     </div>
   );
