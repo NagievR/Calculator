@@ -1,17 +1,16 @@
 import React, { useState, useContext } from 'react';
+import { useInputHandlers } from "./input-handlers.js";
 
 const Context = React.createContext();
 
-export function useInputHandler() {
+export function useDefineInputType() {
   return useContext(Context);
 }
 
-export function InputHandlerProvider({ children }) {
+export function DefineInputTypeProvider({ children }) {
   const [currNum, setCurrNum] = useState('0');
 
-  function handleInput(v) {
-    // console.log(isNaN(v));
-    
+  function defineInputType(v) {
     if (!isNaN(v)) {
       setCurrNum(prevNum => prevNum += v);
     } else {
@@ -21,17 +20,15 @@ export function InputHandlerProvider({ children }) {
     // switch(v) {
     //   // handle symbols
     //   // ...
-
     //   case 
     // }
-
     // console.log(currNum);
-
+    
     return 
   }
 
   const context = {
-    handleInput,
+    defineInputType,
     currNum,
   };
 
