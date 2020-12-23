@@ -8,8 +8,13 @@ export function useInputHandlers() {
 }
 
 export function InputHandlersProvider({ children }) {
-  const context = {
+  function concatCurrNumber() {
     
+  }
+
+  const context = {
+    concatCurrNumber,
+
   };
 
   return (
