@@ -1,31 +1,16 @@
-import {React, useRef, useState, useEffect} from 'react';
+import { React, useRef, useState, useEffect } from 'react';
+import { Textfit } from 'react-textfit';
 
 import './output.css';
 import { useStore } from "../../../logic/store.js";
 
-export function Result({ displayWidth }) {
-  const initialFontSize = 80;
+export function Result() {
   const [number, setNumber] = useState('0');
-  const [fontSize, setFontSize] = useState(initialFontSize);
   const { currentNumber } = useStore();
   const resRef = useRef();
-
-  useEffect(() => {
-    const percentDecrease = 1.18;
-
-    console.log(resRef.current.offsetWidth, displayWidth);
-    console.log(fontSize)
-
-    if (resRef.current.offsetWidth >= displayWidth) {
-      console.log('shut up');
-      setFontSize( prev => prev /= percentDecrease );
-    } else if (null) {
-      
-    }
-  }, [number, displayWidth]);
   
   useEffect(() => {
-    // String(Number.MAX_SAFE_INTEGER).length;
+    console.log( String(Number.MAX_SAFE_INTEGER) );
     const maxNumberLength = 21;
     if (number.length < maxNumberLength) {
       setNumber(currentNumber);
@@ -35,13 +20,15 @@ export function Result({ displayWidth }) {
   }, [number, currentNumber]);
 
   return (
-    <div className={`output-elem-wrap`}> 
-      <span 
-        style={{fontSize: fontSize}}
-        ref={resRef} 
-        id='result'>
-        {number}
-      </span>
-    </div>
+    <Textfit 
+      mode="single"
+      max={80} 
+      min={30}>
+      <div className={`output-elem-wrap`}>   
+        <span ref={resRef} id='result'>
+          {number}
+        </span>
+      </div>
+    </Textfit>
   );
 }
