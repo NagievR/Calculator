@@ -12,21 +12,31 @@ export function InputHandlersProvider({ children }) {
     setCurrentNumber, 
     currentNumber,
     setOperators, 
-    setNumbers } = useStore();
+    setNumbers 
+  } = useStore();
 
   function operatorHandler(op) {
-    if (currentNumber === '0') {
+    if (!currentNumber) {
       console.log('ADD SOME NUMBER FIRST!')
       return;
     }
     setOperators(op);
     setNumbers(prev => prev.concat(Number(currentNumber)));
-    setCurrentNumber('0');
+    setCurrentNumber('');
     // and call calc func
   }
 
-  function currentNumberHandler(str) {
-    setCurrentNumber(prev => prev += str);
+  function currentNumberHandler(num) {
+    const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length;
+    if (currentNumber.length > maxNumberLength) {
+      console.log('MAX CURRENT NUMBER LENGTH!');
+      return;
+    } else if (currentNumber.length === 0 && num === 0) {
+      console.log('NO 0s AT THE BEGINNING!');
+      return;
+    } else {
+      setCurrentNumber(prev => prev += num);
+    }
   }
 
 
