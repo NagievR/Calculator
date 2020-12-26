@@ -22,10 +22,6 @@ export function Result() {
   );
 }
 
-// function formateOutputValue(n) {
-//   if (String(n).length > 3) {
-//     return n.slice(0, 1) + ' ' + n.slice(1);
-//   } else {
-//     return n
-//   }
-// }
+function formateOutputValue(n) {
+  return Number(n).toLocaleString();
+}
