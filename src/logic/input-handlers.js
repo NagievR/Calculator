@@ -17,7 +17,6 @@ export function InputHandlersProvider({ children }) {
 
   function operatorHandler(op) {
     if (!currentNumber) {
-      console.log('ADD SOME NUMBER FIRST!')
       return;
     }
     setOperators(op);
@@ -26,23 +25,49 @@ export function InputHandlersProvider({ children }) {
     // and call calc func
   }
 
-  function currentNumberHandler(num) {
-    const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length;
-    if (currentNumber.length >= maxNumberLength) {
-      console.log('MAX CURRENT NUMBER LENGTH!');
-      return;
-    } else if (currentNumber.length === 0 && num === 0) {
-      console.log('NO 0s AT THE BEGINNING!');
-      return;
-    } else {
+  
+  // ****** current number handlers ******
+    function currentNumberHandler(num) {
+      const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length;
+      const numbersAmount = countNumbersAmount(currentNumber);
+
+      if ((numbersAmount >= maxNumberLength) || 
+        (currentNumber.length === 0 && num === 0)) {
+        return;
+      } 
       setCurrentNumber(prev => prev += num);
     }
-  }
+
+    function pointHandler(point = '.') {
+      if (currentNumber.includes(point)) {
+        return;
+      } else if (!currentNumber.length) {
+        setCurrentNumber(prev => prev += '0' + point);
+      } else {
+        setCurrentNumber(prev => prev += point);
+      }
+    }
+
+    function plusMinusHandler() {
+      const minus = '-';
+      if (!currentNumber.length) {
+        return;
+      } else if (currentNumber.includes(minus)) {
+        setCurrentNumber(prev => prev.slice(1));
+      } else {
+        setCurrentNumber(prev => minus + prev);
+      }
+    }
+  // -------/current number handlers
 
 
   const context = {
     operatorHandler,
+
     currentNumberHandler,
+    pointHandler,
+    plusMinusHandler,
+
   };
 
   return (
@@ -50,4 +75,12 @@ export function InputHandlersProvider({ children }) {
       {children}
     </Context.Provider>
   );
+}
+
+
+function countNumbersAmount(str) {
+  const splitted = str.split('');
+  const onlyNumbers = splitted.filter(it => !isNaN(it));
+
+  return onlyNumbers.length;
 }
