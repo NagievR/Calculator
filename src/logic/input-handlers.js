@@ -28,7 +28,7 @@ export function InputHandlersProvider({ children }) {
 
   function currentNumberHandler(num) {
     const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length;
-    if (currentNumber.length > maxNumberLength) {
+    if (currentNumber.length >= maxNumberLength) {
       console.log('MAX CURRENT NUMBER LENGTH!');
       return;
     } else if (currentNumber.length === 0 && num === 0) {
