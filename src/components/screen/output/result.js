@@ -15,13 +15,17 @@ export function Result() {
       min={30}>
       <div className={`output-elem-wrap`}>   
         <span ref={resRef} id='result'>
-          {formateOutputValue(currentNumber) || '0'}
+          {formateOutputNumber(currentNumber) || '0'}
         </span>
       </div>
     </Textfit>
   );
 }
 
-function formateOutputValue(n) {
-  return Number(n).toLocaleString();
+function formateOutputNumber(num, splitBy = '.') {
+  const [int, float] = num.split(splitBy);
+  const intReadable = Number(int).toLocaleString();
+  const formatted = `${intReadable}${splitBy}${float}`;
+
+  return num.includes(splitBy) ? formatted : intReadable;
 }
