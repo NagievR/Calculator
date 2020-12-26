@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useInputHandlers } from "./input-handlers.js";
-import { useStore } from "./store.js";
 
 const Context = React.createContext();
 
@@ -11,7 +10,12 @@ export function useDefineInputType() {
 export function DefineInputTypeProvider({ children }) {
   const { 
     operatorHandler, 
-    currentNumberHandler, } = useInputHandlers();
+
+    currentNumberHandler,
+    pointHandler,
+    plusMinusHandler,
+    
+  } = useInputHandlers();
 
   const operatorsAction = {
     '÷': {value: '/', priority: 2, doCalc: (a, b) => a / b },
@@ -34,20 +38,21 @@ export function DefineInputTypeProvider({ children }) {
     switch(value) {
       case '=': 
         
-      break;
+        break;
       case 'c': 
         
-      break;
+        break;
       case '⌫': 
         
-      break;
+        break;
       case '±': 
-        
-      break;
+        plusMinusHandler();
+        break;
       case '.': 
-        
-      break;
-      default: alert('unknown symbol!');
+        pointHandler();
+        break;
+      default: 
+        alert('unknown symbol!');
     }
   }
 
