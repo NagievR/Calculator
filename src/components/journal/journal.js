@@ -1,8 +1,11 @@
-import {React} from 'react';
+import { React } from 'react';
 
 import './journal.css';
+import { useStore } from "../../logic/store.js";
 
 export function Journal({ display }) {
+  const { log } = useStore();
+  const logReversed = log.slice().reverse().join(' ');
 
   function toggleDisplaying() {
     const hide = '-420px';
@@ -12,9 +15,7 @@ export function Journal({ display }) {
 
   return (
     <div id='journal-container' style={toggleDisplaying()}>
-      <div id='journal'>
-        7*87+26+6+87*87+26+6+87*87+26+6+87*87+26+6+87*8787+26+6+87*87+26+6+87*87+26+6+87*87+26+6+87*87+26+6+87*8787+26+6+87*87+26+6+87*87+26+6+87*87+26+6+87*87+26+6+87*8787+26+6+87*87+26+6+87*87+26+6+6
-      </div>
+      <div id='journal'>{logReversed} </div>
     </div>
   );
 }
