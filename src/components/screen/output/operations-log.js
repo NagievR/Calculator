@@ -1,36 +1,27 @@
 import {React, useState, useEffect, useRef} from 'react';
 
 import './output.css';
+import { useStore } from "../../../logic/store.js";
 
 export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
   const [isOversized, setIsOversized] = useState(false);
-  const [expr, setExpr] = useState('25646465465465464465556');
-  const ref = useRef();
+  const logContainerRef = useRef();
+  const { log } = useStore();
 
   useEffect(() => {
-    if (ref.current.offsetWidth > displayWidth) {
+    if (logContainerRef.current.offsetWidth > displayWidth) {
       setIsOversized(true);
       setSwitcherDisplaying(true);
     } else {
       setIsOversized(false);
       setSwitcherDisplaying(false);
     }
-  }, [expr, setSwitcherDisplaying, displayWidth]);
-
-  // *********************** FOR TESTING ***********************
-  useEffect(() => {
-    document.addEventListener('keydown', e => {
-      if (e.key === 'b' && e.ctrlKey) {
-        setExpr('256465465465465465464465556');
-      }
-    });
-  }, []);
-  // *********************** FOR TESTING ***********************
+  }, [log, setSwitcherDisplaying, displayWidth]);
 
   return (
     <div className='log-margin-bottom'>
       <div className={`output-elem-wrap ${isOversized ? 'oversized' : ''}`}>
-        <span ref={ref} onClick={() => setExpr(prev => prev + Math.round(Math.random() * 10))} id='log'>{expr}</span>
+        <span ref={logContainerRef} id='log'>{log.join(' ')}</span>
       </div>
     </div>
   );
