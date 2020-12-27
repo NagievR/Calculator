@@ -9,18 +9,20 @@ export function useDefineInputType() {
 
 export function DefineInputTypeProvider({ children }) {
   const { 
-    operatorHandler, 
+    mathOperatorsHandler, 
 
     currentNumberHandler,
-    pointHandler,
-    plusMinusHandler,
-    
+    pointKeyHandler,
+    negateKeyHandler,
+    deleteKeyHandler,
+
+    clearKeyHandler,
   } = useInputHandlers();
 
   const operatorsAction = {
-    '÷': {value: '/', priority: 2, doCalc: (a, b) => a / b },
-    '×': {value: '*', priority: 2, doCalc: (a, b) => a * b },
-    '−': {value: '-', priority: 1, doCalc: (a, b) => a - b }, 
+    '÷': {value: '÷', priority: 2, doCalc: (a, b) => a / b },
+    '×': {value: '×', priority: 2, doCalc: (a, b) => a * b },
+    '−': {value: '−', priority: 1, doCalc: (a, b) => a - b }, 
     '+': {value: '+', priority: 1, doCalc: (a, b) => a + b },
   };
 
@@ -31,7 +33,7 @@ export function DefineInputTypeProvider({ children }) {
     } 
 
     if (operatorsAction[value]) {
-      operatorHandler( operatorsAction[value] );
+      mathOperatorsHandler( operatorsAction[value] );
       return;
     }
 
@@ -40,16 +42,16 @@ export function DefineInputTypeProvider({ children }) {
         
         break;
       case 'c': 
-        
+        clearKeyHandler();
         break;
       case '⌫': 
-        
+        deleteKeyHandler();
         break;
       case '±': 
-        plusMinusHandler();
+        negateKeyHandler();
         break;
       case '.': 
-        pointHandler();
+        pointKeyHandler();
         break;
       default: 
         alert('unknown symbol!');
