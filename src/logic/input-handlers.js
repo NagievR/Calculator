@@ -9,20 +9,35 @@ export function useInputHandlers() {
 
 export function InputHandlersProvider({ children }) {
   const { 
-    setCurrentNumber, 
     currentNumber,
+    setCurrentNumber, 
+
+    setNumbers,
+    
     setOperators, 
-    setNumbers 
+
+    setLog,
   } = useStore();
 
-  function operatorHandler(op) {
+  function mathOperatorsHandler(op) {
     if (!currentNumber) {
       return;
     }
-    setOperators(op);
+    setLog(prev => prev.concat(currentNumber));
+    setLog(prev => prev.concat(op.value));
+
+    setOperators(prev => prev.concat(op));
     setNumbers(prev => prev.concat(Number(currentNumber)));
     setCurrentNumber('');
     // and call calc func
+  }
+
+
+  function clearKeyHandler() {
+    setLog([]);
+    setCurrentNumber('');
+    setNumbers([]);
+    setOperators([]);
   }
 
   
@@ -34,11 +49,11 @@ export function InputHandlersProvider({ children }) {
       if ((numbersAmount >= maxNumberLength) || 
         (currentNumber.length === 0 && num === 0)) {
         return;
-      } 
+      }
       setCurrentNumber(prev => prev += num);
     }
 
-    function pointHandler(point = '.') {
+    function pointKeyHandler(point = '.') {
       if (currentNumber.includes(point)) {
         return;
       } else if (!currentNumber.length) {
@@ -48,7 +63,7 @@ export function InputHandlersProvider({ children }) {
       }
     }
 
-    function plusMinusHandler() {
+    function negateKeyHandler() {
       const minus = '-';
       if (!currentNumber.length) {
         return;
@@ -58,16 +73,28 @@ export function InputHandlersProvider({ children }) {
         setCurrentNumber(prev => minus + prev);
       }
     }
+
+    function deleteKeyHandler() {
+      if (currentNumber.includes('-') && currentNumber.length === 2) {
+        setCurrentNumber('');
+      } else {
+        setCurrentNumber(prev => prev.slice(0, prev.length - 1));
+      }
+    }
   // -------/current number handlers
 
 
+
+
   const context = {
-    operatorHandler,
+    mathOperatorsHandler,
 
     currentNumberHandler,
-    pointHandler,
-    plusMinusHandler,
+    pointKeyHandler,
+    negateKeyHandler,
+    deleteKeyHandler,
 
+    clearKeyHandler,
   };
 
   return (
