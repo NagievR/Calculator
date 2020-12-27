@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 const Context = React.createContext();
 
@@ -8,25 +8,28 @@ export function useStore() {
 
 export function StoreProvider({ children }) {
   const [numbers, setNumbers] = useState([]);
-  const operators = useRef([]);
   const [currentNumber, setCurrentNumber] = useState('');
-
-  function setOperators(op) {
-    const prevArr = operators.current;
-    operators.current = prevArr.concat(op);
-  }
+  const [operators, setOperators] = useState([]);
+  const [log, setLog] = useState([]);
 
   const context = {
     currentNumber,
     setCurrentNumber,
+
+    numbers,
     setNumbers,
+
     setOperators,
+
+    log,
+    setLog,
   };
 
   // console.log('*******************');
   // console.log('currentNumber:\n');
   // console.log(currentNumber)
   // console.log('operators:\n');
+  // console.log(operators);
   // console.log(operators.current);
   // console.log('numbers:\n');
   // console.log(numbers)
