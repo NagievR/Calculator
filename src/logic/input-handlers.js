@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { calculatorManager, calculate } from "./calc.js";
 import { useStore } from "./store.js";
 
 const Context = React.createContext();
@@ -12,12 +13,23 @@ export function InputHandlersProvider({ children }) {
     currentNumber,
     setCurrentNumber, 
 
+    numbers,
     setNumbers,
     
+    operators,
     setOperators, 
 
     setLog,
   } = useStore();
+
+  // useEffect(() => {
+  //   console.log('effect');
+  //   console.log(numbers, operators);
+  //   const [nums, ops] = calculatorManager(numbers, operators);
+
+  //   setOperators(ops);
+  //   setNumbers(nums);
+  // }, [operators, numbers]);
 
   function mathOperatorsHandler(op) {
     if (!currentNumber) {
@@ -29,7 +41,6 @@ export function InputHandlersProvider({ children }) {
     setOperators(prev => prev.concat(op));
     setNumbers(prev => prev.concat(Number(currentNumber)));
     setCurrentNumber('');
-    // and call calc func
   }
 
 
@@ -82,9 +93,6 @@ export function InputHandlersProvider({ children }) {
       }
     }
   // -------/current number handlers
-
-
-
 
   const context = {
     mathOperatorsHandler,
