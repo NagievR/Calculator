@@ -12,13 +12,23 @@ export function StoreProvider({ children }) {
   const [operators, setOperators] = useState([]);
   const [log, setLog] = useState([]);
 
+  const operatorsAction = {
+    '÷': {value: '÷', priority: 2, doCalc: (a, b) => a / b },
+    '×': {value: '×', priority: 2, doCalc: (a, b) => a * b },
+    '−': {value: '−', priority: 1, doCalc: (a, b) => a - b }, 
+    '+': {value: '+', priority: 1, doCalc: (a, b) => a + b },
+  };
+
   const context = {
+    operatorsAction,
+
     currentNumber,
     setCurrentNumber,
 
     numbers,
     setNumbers,
 
+    operators,
     setOperators,
 
     log,

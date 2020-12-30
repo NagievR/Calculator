@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useInputHandlers } from "./input-handlers.js";
+import { useStore } from './store.js';
 
 const Context = React.createContext();
 
@@ -19,24 +20,17 @@ export function DefineInputTypeProvider({ children }) {
     clearKeyHandler,
   } = useInputHandlers();
 
-  const operatorsAction = {
-    '÷': {value: '÷', priority: 2, doCalc: (a, b) => a / b },
-    '×': {value: '×', priority: 2, doCalc: (a, b) => a * b },
-    '−': {value: '−', priority: 1, doCalc: (a, b) => a - b }, 
-    '+': {value: '+', priority: 1, doCalc: (a, b) => a + b },
-  };
+  const { operatorsAction } = useStore()
 
   function defineInputType(value) {
     if (!isNaN(value)) {
       currentNumberHandler(value);
       return;
     } 
-
     if (operatorsAction[value]) {
       mathOperatorsHandler( operatorsAction[value] );
       return;
     }
-
     switch(value) {
       case '=': 
         
