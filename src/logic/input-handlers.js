@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { calculatorManager, calculate } from "./calc.js";
+import { operatorsManager, calculate } from "./calc.js";
 import { useStore } from "./store.js";
 
 const Context = React.createContext();
@@ -13,23 +13,11 @@ export function InputHandlersProvider({ children }) {
     currentNumber,
     setCurrentNumber, 
 
-    numbers,
-    setNumbers,
-    
-    operators,
-    setOperators, 
+    numbersStack,
+    operatorsStack,
 
     setLog,
   } = useStore();
-
-  // useEffect(() => {
-  //   console.log('effect');
-  //   console.log(numbers, operators);
-  //   const [nums, ops] = calculatorManager(numbers, operators);
-
-  //   setOperators(ops);
-  //   setNumbers(nums);
-  // }, [operators, numbers]);
 
   function mathOperatorsHandler(op) {
     if (!currentNumber) {
@@ -38,17 +26,33 @@ export function InputHandlersProvider({ children }) {
     setLog(prev => prev.concat(currentNumber));
     setLog(prev => prev.concat(op.value));
 
-    setOperators(prev => prev.concat(op));
-    setNumbers(prev => prev.concat(Number(currentNumber)));
+    numbersStack.push(Number(currentNumber));
+    operatorsManager(op, operatorsStack, numbersStack);
     setCurrentNumber('');
+
+    console.log(`LAST NUM: ${numbersStack[numbersStack.length - 1]}`);
   }
 
 
   function clearKeyHandler() {
+    operatorsStack.length = 0;
+    numbersStack.length = 0;
     setLog([]);
     setCurrentNumber('');
-    setNumbers([]);
-    setOperators([]);
+    console.clear();
+  }
+
+  function equalsHandler() {
+    setLog(prev => prev.concat(currentNumber));
+    numbersStack.push(Number(currentNumber));
+
+    if (!currentNumber) { //  && numbersStack.length === operatorsStack.length
+      operatorsStack.pop();
+      setLog(prev => prev.slice(0, prev.length - 2));
+    }
+    setLog(prev => prev.concat('='));
+    setCurrentNumber('');
+    calculate(operatorsStack, numbersStack, operatorsStack.length);
   }
 
   
@@ -101,6 +105,7 @@ export function InputHandlersProvider({ children }) {
     pointKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
+    equalsHandler,
 
     clearKeyHandler,
   };
