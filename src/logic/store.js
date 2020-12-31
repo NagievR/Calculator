@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 const Context = React.createContext();
 
@@ -7,9 +7,13 @@ export function useStore() {
 }
 
 export function StoreProvider({ children }) {
-  const [numbers, setNumbers] = useState([]);
+  // const [numbers, setNumbers] = useState([]);
+  // const [operators, setOperators] = useState([]);
+
+  const numbersStack = useRef([]);  
+  const operatorsStack = useRef([]);
+
   const [currentNumber, setCurrentNumber] = useState('');
-  const [operators, setOperators] = useState([]);
   const [log, setLog] = useState([]);
 
   const operatorsAction = {
@@ -25,16 +29,14 @@ export function StoreProvider({ children }) {
     currentNumber,
     setCurrentNumber,
 
-    numbers,
-    setNumbers,
-
-    operators,
-    setOperators,
-
     log,
     setLog,
+
+    numbersStack: numbersStack.current,
+    operatorsStack: operatorsStack.current,
   };
 
+  console.log(log)
   // console.log('*******************');
   // console.log('currentNumber:\n');
   // console.log(currentNumber)
