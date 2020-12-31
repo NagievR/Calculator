@@ -7,9 +7,6 @@ export function useStore() {
 }
 
 export function StoreProvider({ children }) {
-  // const [numbers, setNumbers] = useState([]);
-  // const [operators, setOperators] = useState([]);
-
   const numbersStack = useRef([]);  
   const operatorsStack = useRef([]);
 
