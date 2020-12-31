@@ -16,6 +16,7 @@ export function DefineInputTypeProvider({ children }) {
     pointKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
+    equalsHandler,
 
     clearKeyHandler,
   } = useInputHandlers();
@@ -33,7 +34,7 @@ export function DefineInputTypeProvider({ children }) {
     }
     switch(value) {
       case '=': 
-        
+        equalsHandler();
         break;
       case 'c': 
         clearKeyHandler();
