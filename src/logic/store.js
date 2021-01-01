@@ -1,7 +1,6 @@
 import React, { useState, useContext, useRef } from 'react';
 
 const Context = React.createContext();
-
 export function useStore() {
   return useContext(Context);
 }
@@ -10,6 +9,7 @@ export function StoreProvider({ children }) {
   const numbersStack = useRef([]);  
   const operatorsStack = useRef([]);
 
+  const [currentResult, setCurrentResult] = useState('');
   const [currentNumber, setCurrentNumber] = useState('');
   const [log, setLog] = useState([]);
 
@@ -21,28 +21,16 @@ export function StoreProvider({ children }) {
   };
 
   const context = {
-    operatorsAction,
-
     currentNumber,
     setCurrentNumber,
-
+    currentResult,
+    setCurrentResult,
     log,
     setLog,
-
+    operatorsAction,
     numbersStack: numbersStack.current,
     operatorsStack: operatorsStack.current,
   };
-
-  console.log(log)
-  // console.log('*******************');
-  // console.log('currentNumber:\n');
-  // console.log(currentNumber)
-  // console.log('operators:\n');
-  // console.log(operators);
-  // console.log(operators.current);
-  // console.log('numbers:\n');
-  // console.log(numbers)
-  // console.log('*******************');
 
   return (
     <Context.Provider value={context}>
