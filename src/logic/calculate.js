@@ -24,10 +24,7 @@ export function calculate(operators, numbers, iterations = 1) {
     const [b, a] = [numbers.pop(), numbers.pop()];
     const op = operators.pop();
     const sum = op.doCalc(a, b);
-
     numbers.push(sum);
-    console.log(`MEDIUM RESULT ${numbers[numbers.length - 1]}`);
-
     iterations--;
   }
 } 
