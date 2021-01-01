@@ -5,27 +5,31 @@ import './output.css';
 import { useStore } from "../../../logic/store.js";
 
 export function Result() {
-  const { currentNumber } = useStore();
-  const resRef = useRef();
+  const { currentNumber, currentResult } = useStore();
+  const resultRef = useRef();
+
+  function defineOutput() {
+    return (currentResult !== '' && formateOutputNumber(currentResult)) 
+      || formateOutputNumber(currentNumber) 
+      || '0';
+  }
 
   return (
     <Textfit 
       mode="single"
-      max={80} 
-      min={30}>
+      max={80}>
       <div className={`output-elem-wrap`}>   
-        <span ref={resRef} id='result'>
-          {formateOutputNumber(currentNumber) || '0'}
-        </span>
+        <span ref={resultRef} id='result'>{defineOutput()}</span>
       </div>
     </Textfit>
   );
 }
 
 function formateOutputNumber(num, splitBy = '.') {
-  const [int, float] = num.split(splitBy);
+  const number = String(num);
+  const [int, float] = number.split(splitBy);
   const intReadable = Number(int).toLocaleString();
   const formatted = `${intReadable}${splitBy}${float}`;
-
-  return num.includes(splitBy) ? formatted : intReadable;
+  
+  return number.includes(splitBy) ? formatted : intReadable;
 }
