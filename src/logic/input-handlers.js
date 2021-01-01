@@ -41,6 +41,9 @@ export function InputHandlersProvider({ children }) {
   }
 
   function equalsKeyHandler() {
+    if (!operatorsStack.length) {
+      return;
+    }
     if (!currentNumber) {
       operatorsStack.pop();
       setLog(prev => prev.slice(0, prev.length - 1));
@@ -50,15 +53,18 @@ export function InputHandlersProvider({ children }) {
     }
     setLog(prev => prev.concat('='));
     calculate(operatorsStack, numbersStack, operatorsStack.length);
-    setCurrentNumber('');
     setCurrentResult(numbersStack[numbersStack.length - 1]);
+    setCurrentNumber(String(numbersStack[numbersStack.length - 1]));
   }
 
   
   // ****** current number handlers ******
-    function removeLogAfterCalc() {
+    function endOfCalculationsHandler() {
       if (log[log.length - 1] === '=') {
-        setLog([]);
+        clearKeyHandler();
+        // setLog([]);
+        // setCurrentNumber('');
+        // setCurrentResult('');
       } 
     }
 
@@ -70,7 +76,7 @@ export function InputHandlersProvider({ children }) {
         (currentNumber.length === 0 && num === 0)) {
         return;
       }
-      removeLogAfterCalc();
+      endOfCalculationsHandler();
       setCurrentResult('');
       setCurrentNumber(prev => prev += num);
     }
