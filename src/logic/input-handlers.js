@@ -59,7 +59,7 @@ export function InputHandlersProvider({ children }) {
 
   
   // ****** current number handlers ******
-    function endOfCalculationsHandler() {
+    function defineEndOfCalculations() {
       if (log[log.length - 1] === '=') {
         clearKeyHandler();
         // setLog([]);
@@ -76,7 +76,7 @@ export function InputHandlersProvider({ children }) {
         (currentNumber.length === 0 && num === 0)) {
         return;
       }
-      endOfCalculationsHandler();
+      defineEndOfCalculations();
       setCurrentResult('');
       setCurrentNumber(prev => prev += num);
     }
