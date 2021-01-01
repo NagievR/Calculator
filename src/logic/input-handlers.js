@@ -11,10 +11,11 @@ export function InputHandlersProvider({ children }) {
   const { 
     currentNumber,
     setCurrentNumber, 
+    setCurrentResult,
+    log,
+    setLog,
     numbersStack,
     operatorsStack,
-    setCurrentResult,
-    setLog,
   } = useStore();
 
   function clearKeyHandler() {
@@ -40,12 +41,12 @@ export function InputHandlersProvider({ children }) {
   }
 
   function equalsKeyHandler() {
-    numbersStack.push(Number(currentNumber));
-    setLog(prev => prev.concat(currentNumber));
-
-    if (!currentNumber) { //  && numbersStack.length === operatorsStack.length
+    if (!currentNumber) {
       operatorsStack.pop();
-      setLog(prev => prev.slice(0, prev.length - 2));
+      setLog(prev => prev.slice(0, prev.length - 1));
+    } else {
+      numbersStack.push(Number(currentNumber));
+      setLog(prev => prev.concat(currentNumber));
     }
     setLog(prev => prev.concat('='));
     calculate(operatorsStack, numbersStack, operatorsStack.length);
@@ -55,6 +56,12 @@ export function InputHandlersProvider({ children }) {
 
   
   // ****** current number handlers ******
+    function removeLogAfterCalc() {
+      if (log[log.length - 1] === '=') {
+        setLog([]);
+      } 
+    }
+
     function currentNumberHandler(num) {
       const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length;
       const numbersAmount = countNumbersAmount(currentNumber);
@@ -63,6 +70,7 @@ export function InputHandlersProvider({ children }) {
         (currentNumber.length === 0 && num === 0)) {
         return;
       }
+      removeLogAfterCalc();
       setCurrentResult('');
       setCurrentNumber(prev => prev += num);
     }
