@@ -1,4 +1,6 @@
 .key, .double-key {
+  user-select: none;
+  cursor: pointer;
   width: 80px;
   height: 80px;
   background-color: #C4C4C4;
@@ -9,15 +11,22 @@
   align-items: center;
   font-size: 48px;
   border-radius: 3px;
+  transition: .2s;
+}
+.key:active {
+  background-color: #afaeae;
+}
+
+.math-operator {
+  background-color: #ff8c00;
+  color: #F1F1F1;
+}
+.math-operator:active {
+  background-color: #FF9D40;
 }
 
 .double-key {
   width: 162px;
-}
-
-.math-operator {
-  background-color: #FF8C00;
-  color: #F1F1F1;
 }
 
 .delete {
