@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { operatorsManager, calculate } from "./calc.js";
+import React, { useContext } from 'react';
+import { operatorsManager, calculate } from "./calculate.js";
 import { useStore } from "./store.js";
 
 const Context = React.createContext();
-
 export function useInputHandlers() {
   return useContext(Context);
 }
@@ -12,12 +11,20 @@ export function InputHandlersProvider({ children }) {
   const { 
     currentNumber,
     setCurrentNumber, 
-
     numbersStack,
     operatorsStack,
-
+    setCurrentResult,
     setLog,
   } = useStore();
+
+  function clearKeyHandler() {
+    operatorsStack.length = 0;
+    numbersStack.length = 0;
+    setLog([]);
+    setCurrentNumber('');
+    setCurrentResult('');
+    console.clear();
+  }
 
   function mathOperatorsHandler(op) {
     if (!currentNumber) {
@@ -29,30 +36,21 @@ export function InputHandlersProvider({ children }) {
     numbersStack.push(Number(currentNumber));
     operatorsManager(op, operatorsStack, numbersStack);
     setCurrentNumber('');
-
-    console.log(`LAST NUM: ${numbersStack[numbersStack.length - 1]}`);
+    setCurrentResult(numbersStack[numbersStack.length - 1]);
   }
 
-
-  function clearKeyHandler() {
-    operatorsStack.length = 0;
-    numbersStack.length = 0;
-    setLog([]);
-    setCurrentNumber('');
-    console.clear();
-  }
-
-  function equalsHandler() {
-    setLog(prev => prev.concat(currentNumber));
+  function equalsKeyHandler() {
     numbersStack.push(Number(currentNumber));
+    setLog(prev => prev.concat(currentNumber));
 
     if (!currentNumber) { //  && numbersStack.length === operatorsStack.length
       operatorsStack.pop();
       setLog(prev => prev.slice(0, prev.length - 2));
     }
     setLog(prev => prev.concat('='));
-    setCurrentNumber('');
     calculate(operatorsStack, numbersStack, operatorsStack.length);
+    setCurrentNumber('');
+    setCurrentResult(numbersStack[numbersStack.length - 1]);
   }
 
   
@@ -65,16 +63,18 @@ export function InputHandlersProvider({ children }) {
         (currentNumber.length === 0 && num === 0)) {
         return;
       }
+      setCurrentResult('');
       setCurrentNumber(prev => prev += num);
     }
 
-    function pointKeyHandler(point = '.') {
-      if (currentNumber.includes(point)) {
+    function floatKeyHandler(splitBy = '.') {
+      setCurrentResult('');
+      if (currentNumber.includes(splitBy)) {
         return;
       } else if (!currentNumber.length) {
-        setCurrentNumber(prev => prev += '0' + point);
+        setCurrentNumber(prev => prev += '0' + splitBy);
       } else {
-        setCurrentNumber(prev => prev += point);
+        setCurrentNumber(prev => prev += splitBy);
       }
     }
 
@@ -90,6 +90,7 @@ export function InputHandlersProvider({ children }) {
     }
 
     function deleteKeyHandler() {
+      setCurrentResult('');
       if (currentNumber.includes('-') && currentNumber.length === 2) {
         setCurrentNumber('');
       } else {
@@ -100,13 +101,11 @@ export function InputHandlersProvider({ children }) {
 
   const context = {
     mathOperatorsHandler,
-
     currentNumberHandler,
-    pointKeyHandler,
+    floatKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
-    equalsHandler,
-
+    equalsKeyHandler,
     clearKeyHandler,
   };
 
@@ -121,6 +120,5 @@ export function InputHandlersProvider({ children }) {
 function countNumbersAmount(str) {
   const splitted = str.split('');
   const onlyNumbers = splitted.filter(it => !isNaN(it));
-
   return onlyNumbers.length;
 }
