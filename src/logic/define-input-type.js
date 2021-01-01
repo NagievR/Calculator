@@ -3,25 +3,28 @@ import { useInputHandlers } from "./input-handlers.js";
 import { useStore } from './store.js';
 
 const Context = React.createContext();
-
 export function useDefineInputType() {
   return useContext(Context);
 }
 
 export function DefineInputTypeProvider({ children }) {
+  const symbols = {
+    equals: '=',
+    clearAll: 'c',
+    remove: '⌫',
+    negate: '±',
+    float: '.',
+  };
+  const { operatorsAction } = useStore();
   const { 
     mathOperatorsHandler, 
-
     currentNumberHandler,
-    pointKeyHandler,
+    floatKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
-    equalsHandler,
-
+    equalsKeyHandler,
     clearKeyHandler,
   } = useInputHandlers();
-
-  const { operatorsAction } = useStore()
 
   function defineInputType(value) {
     if (!isNaN(value)) {
@@ -33,23 +36,24 @@ export function DefineInputTypeProvider({ children }) {
       return;
     }
     switch(value) {
-      case '=': 
-        equalsHandler();
+      case symbols.equals: 
+        equalsKeyHandler();
         break;
-      case 'c': 
+      case symbols.clearAll: 
         clearKeyHandler();
         break;
-      case '⌫': 
+      case symbols.remove: 
         deleteKeyHandler();
         break;
-      case '±': 
+      case symbols.negate: 
         negateKeyHandler();
         break;
-      case '.': 
-        pointKeyHandler();
+      case symbols.float: 
+        floatKeyHandler();
         break;
       default: 
-        alert('unknown symbol!');
+        alert('unknown symbol');
+        console.log(`unknown symbol: "${value}"`);
     }
   }
 
