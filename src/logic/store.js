@@ -14,10 +14,10 @@ export function StoreProvider({ children }) {
   const [log, setLog] = useState([]);
 
   const operatorsAction = {
-    '÷': {value: '÷', priority: 2, doCalc: (a, b) => a / b },
-    '×': {value: '×', priority: 2, doCalc: (a, b) => a * b },
-    '−': {value: '−', priority: 1, doCalc: (a, b) => a - b }, 
-    '+': {value: '+', priority: 1, doCalc: (a, b) => a + b },
+    '÷': {value: '÷', priority: 2, doOperation: (a, b) => a / b },
+    '×': {value: '×', priority: 2, doOperation: (a, b) => a * b },
+    '−': {value: '−', priority: 1, doOperation: (a, b) => a - b }, 
+    '+': {value: '+', priority: 1, doOperation: (a, b) => a + b },
   };
 
   const context = {

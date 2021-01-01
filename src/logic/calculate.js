@@ -23,7 +23,7 @@ export function calculate(operators, numbers, iterations = 1) {
   while (iterations) {
     const [b, a] = [numbers.pop(), numbers.pop()];
     const op = operators.pop();
-    const sum = op.doCalc(a, b);
+    const sum = op.doOperation(a, b);
     numbers.push(sum);
     iterations--;
   }
