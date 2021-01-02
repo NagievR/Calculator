@@ -5,12 +5,13 @@ import './output.css';
 import { useStore } from "../../../logic/store.js";
 
 export function Result() {
-  const { currentNumber, currentResult } = useStore();
   const resultRef = useRef();
+  const { currentNumber, currentResult } = useStore();
+  let result = formateResult(currentResult);
 
   function defineOutput() {
-    return (currentResult !== '' && formateOutputNumber(currentResult)) 
-      || formateOutputNumber(currentNumber) 
+    return (result !== '' && formateOutput(result)) 
+      || formateOutput(currentNumber) 
       || '0';
   }
 
@@ -25,11 +26,15 @@ export function Result() {
   );
 }
 
-function formateOutputNumber(num, splitBy = '.') {
+function formateOutput(num, splitBy = '.') {
   const number = String(num);
   const [int, float] = number.split(splitBy);
   const intReadable = Number(int).toLocaleString();
   const formatted = `${intReadable}${splitBy}${float}`;
   
   return number.includes(splitBy) ? formatted : intReadable;
+}
+
+function formateResult(num) {
+  return Number.isInteger(Number(num)) ? num : num.toFixed(4);
 }
