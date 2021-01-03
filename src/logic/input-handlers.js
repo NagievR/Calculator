@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { operatorsManager, calculate } from "./calculate.js";
 import { useStore } from "./store.js";
 
@@ -21,21 +21,65 @@ export function InputHandlersProvider({ children }) {
   function clearKeyHandler() {
     operatorsStack.length = 0;
     numbersStack.length = 0;
+    savedNumbersStack = null;
     setLog([]);
     setCurrentNumber('');
     setCurrentResult('');
     console.clear();
   }
 
-  function mathOperatorsHandler(op) {
-    if (!currentNumber) {
+
+  let savedNumbersStack = useRef(null);
+  let savedOperatorsStack = useRef(null);
+
+  function changeOperator(op) {
+    if (op.value === log[log.length - 1]) {
+      console.log('stop!');
       return;
     }
-    setLog(prev => prev.concat(currentNumber));
+    
+    numbersStack.length = 0;
+    numbersStack.push(...savedNumbersStack.current);
+
+    operatorsStack.length = 0;
+    operatorsStack.push(...savedOperatorsStack.current);
+
+    // console.log(numbersStack);
+    // if (op.priority )
+    // console.log(operatorsStack);
+    
+    // if (operatorsStack.length <= 1) {
+    //   operatorsStack.pop();
+    // }
+
+    // if (op.priority < 2) {
+    //   operatorsStack.pop();
+    // }
+
+    // operatorsStack.pop();
+    
+    setLog(prev => prev.slice(0, prev.length - 1));
     setLog(prev => prev.concat(op.value));
+    
+    operatorsManager(op, operatorsStack, numbersStack);
+    setCurrentResult(numbersStack[numbersStack.length - 1]);
+  }
+
+  function mathOperatorsHandler(op) {
+    if (!currentNumber && isNaN(log[log.length - 1])) {
+      console.log('Changing an operator.');
+      changeOperator(op);
+      return;
+    }
+    setLog(prev => prev.concat(currentNumber, op.value));
 
     numbersStack.push(Number(currentNumber));
+    savedNumbersStack.current = numbersStack.slice();
+    savedOperatorsStack.current = operatorsStack.slice();
+
+    setCurrentNumber('');
     operatorsManager(op, operatorsStack, numbersStack);
+
     setCurrentNumber('');
     setCurrentResult(numbersStack[numbersStack.length - 1]);
   }
