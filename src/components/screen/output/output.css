@@ -21,7 +21,7 @@
 }
 
 .oversized {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(236,233,233) 10%);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.33) 0%, rgba(236,233,233) 10%);
 }
 
 .log-margin-bottom {
