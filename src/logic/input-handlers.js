@@ -22,10 +22,11 @@ export function InputHandlersProvider({ children }) {
     operatorsStack.length = 0;
     numbersStack.length = 0;
     savedNumbersStack = null;
+    savedOperatorsStack = null;
     setLog([]);
     setCurrentNumber('');
     setCurrentResult('');
-    console.clear();
+    // console.clear();
   }
 
 
@@ -33,30 +34,14 @@ export function InputHandlersProvider({ children }) {
   let savedOperatorsStack = useRef(null);
 
   function changeOperator(op) {
-    if (op.value === log[log.length - 1]) {
-      console.log('stop!');
+    if (op.value === log[log.length - 1] || !log.length) {
       return;
     }
-    
     numbersStack.length = 0;
     numbersStack.push(...savedNumbersStack.current);
 
     operatorsStack.length = 0;
     operatorsStack.push(...savedOperatorsStack.current);
-
-    // console.log(numbersStack);
-    // if (op.priority )
-    // console.log(operatorsStack);
-    
-    // if (operatorsStack.length <= 1) {
-    //   operatorsStack.pop();
-    // }
-
-    // if (op.priority < 2) {
-    //   operatorsStack.pop();
-    // }
-
-    // operatorsStack.pop();
     
     setLog(prev => prev.slice(0, prev.length - 1));
     setLog(prev => prev.concat(op.value));
@@ -66,25 +51,26 @@ export function InputHandlersProvider({ children }) {
   }
 
   function mathOperatorsHandler(op) {
+    // debugger
+
     if (!currentNumber && isNaN(log[log.length - 1])) {
-      console.log('Changing an operator.');
       changeOperator(op);
       return;
     }
     setLog(prev => prev.concat(currentNumber, op.value));
 
     numbersStack.push(Number(currentNumber));
+    setCurrentNumber('');
+
     savedNumbersStack.current = numbersStack.slice();
     savedOperatorsStack.current = operatorsStack.slice();
-
-    setCurrentNumber('');
+    
     operatorsManager(op, operatorsStack, numbersStack);
-
-    setCurrentNumber('');
     setCurrentResult(numbersStack[numbersStack.length - 1]);
   }
 
   function equalsKeyHandler() {
+    // debugger
     if (!operatorsStack.length) {
       return;
     }
@@ -97,30 +83,32 @@ export function InputHandlersProvider({ children }) {
     }
     setLog(prev => prev.concat('='));
     calculate(operatorsStack, numbersStack, operatorsStack.length);
-    setCurrentResult(numbersStack[numbersStack.length - 1]);
+    // setCurrentResult(numbersStack[numbersStack.length - 1]);
     setCurrentNumber(String(numbersStack[numbersStack.length - 1]));
   }
 
   
   // ****** current number handlers ******
-    function defineEndOfCalculations() {
-      if (log[log.length - 1] === '=') {
-        clearKeyHandler();
-        // setLog([]);
-        // setCurrentNumber('');
-        // setCurrentResult('');
+    function isEndOfCalculations(num) {
+      if (log[log.length - 1] !== '=') {
+        return false;
       } 
+      clearKeyHandler();
+      setCurrentNumber(prev => prev += num);
+      return true;
     }
 
     function currentNumberHandler(num) {
-      const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length;
+      if (isEndOfCalculations(num)) {
+        return;
+      };
+      const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length; 
       const numbersAmount = countNumbersAmount(currentNumber);
 
-      if ((numbersAmount >= maxNumberLength) || 
-        (currentNumber.length === 0 && num === 0)) {
+      if ((numbersAmount >= maxNumberLength) ||
+        (!currentNumber.length && num === 0)) {
         return;
       }
-      defineEndOfCalculations();
       setCurrentResult('');
       setCurrentNumber(prev => prev += num);
     }
@@ -176,7 +164,7 @@ export function InputHandlersProvider({ children }) {
 
 
 function countNumbersAmount(str) {
-  const splitted = str.split('');
+  const splitted = String(str).split('');
   const onlyNumbers = splitted.filter(it => !isNaN(it));
   return onlyNumbers.length;
 }
