@@ -20,6 +20,14 @@ export function StoreProvider({ children }) {
     '+': {value: '+', priority: 1, doOperation: (a, b) => a + b },
   };
 
+  function clearStore() {
+    operatorsStack.current.length = 0;
+    numbersStack.current.length = 0;
+    setCurrentNumber('');
+    setCurrentResult('');
+    setLog([]);
+  }
+
   const context = {
     currentNumber,
     setCurrentNumber,
@@ -30,6 +38,7 @@ export function StoreProvider({ children }) {
     operatorsAction,
     numbersStack: numbersStack.current,
     operatorsStack: operatorsStack.current,
+    clearStore,
   };
 
   return (
