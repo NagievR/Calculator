@@ -18,7 +18,7 @@ export function DefineInputTypeProvider({ children }) {
   const { operatorsAction } = useStore();
   const { 
     mathOperatorsHandler, 
-    currentNumberHandler,
+    inputHandler,
     floatKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
@@ -28,7 +28,7 @@ export function DefineInputTypeProvider({ children }) {
 
   function defineInputType(value) {
     if (!isNaN(value)) {
-      currentNumberHandler(value);
+      inputHandler(value);
       return;
     } 
     if (operatorsAction[value]) {
