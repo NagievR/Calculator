@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { useStore } from "./store.js";
-import { calculate } from "./calculate.js";
+
+// handlers
 import { currentInputNumber } from './handlers/current-input-number.js';
 import { mathOperatorsAction } from './handlers/math-operator-action.js';
+import { equalsKeyAction } from './handlers/equals-key-action.js'
 
 const Context = React.createContext();
 export function useHandlersComposition() {
@@ -10,17 +12,12 @@ export function useHandlersComposition() {
 }
 
 export function HandlersCompositionProvider({ children }) {
+  const { clearStore } = useStore();
+  function clearKeyHandler() {
+    clearStore();
+  }
+
   const store = useStore();
-  const { 
-    currentNumber,
-    setCurrentNumber, 
-    setCurrentResult,
-    // log,
-    setLog,
-    numbersStack,
-    operatorsStack,
-    clearStore,
-  } = useStore();
   
   const {
     numberHandler,
@@ -33,27 +30,10 @@ export function HandlersCompositionProvider({ children }) {
     mathOperatorHandler,
   } = mathOperatorsAction(store);
 
-  function equalsKeyHandler() {
-    if (!operatorsStack.length) { // ================
-      return;
-    }
-    if (!currentNumber) {
-      operatorsStack.pop();
-      setLog(prev => prev.slice(0, prev.length - 1));
-    } else {
-      numbersStack.push(Number(currentNumber));
-      setLog(prev => prev.concat(currentNumber));
-    }
-    setLog(prev => prev.concat('='));
-    calculate(operatorsStack, numbersStack, operatorsStack.length);
-    setCurrentResult(numbersStack[numbersStack.length - 1]);
-    setCurrentNumber(String(numbersStack[numbersStack.length - 1]));
-  }
+  const {
+    equalsKeyHandler,
+  } = equalsKeyAction(store);
   
-  function clearKeyHandler() {
-    clearStore();
-  }
-
   const context = {
     numberHandler,
     floatKeyHandler,
