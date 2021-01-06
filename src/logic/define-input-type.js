@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useInputHandlers } from "./input-handlers.js";
+import { useHandlersComposition } from "./handlers-composition.js";
 import { useStore } from './store.js';
 
 const Context = React.createContext();
@@ -24,7 +24,7 @@ export function DefineInputTypeProvider({ children }) {
     deleteKeyHandler,
     equalsKeyHandler,
     clearKeyHandler,
-  } = useInputHandlers();
+  } = useHandlersComposition();
 
   function defineInputType(value) {
     if (!isNaN(value)) {

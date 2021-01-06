@@ -5,11 +5,11 @@ import { currentInputNumber } from './handlers/current-input-number.js';
 import { mathOperatorsAction } from './handlers/math-operator-action.js';
 
 const Context = React.createContext();
-export function useInputHandlers() {
+export function useHandlersComposition() {
   return useContext(Context);
 }
 
-export function InputHandlersProvider({ children }) {
+export function HandlersCompositionProvider({ children }) {
   const store = useStore();
   const { 
     currentNumber,

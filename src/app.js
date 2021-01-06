@@ -7,7 +7,7 @@ import { Journal } from './components/journal/journal.js';
 
 // providers
 import { StoreProvider } from "./logic/store.js";
-import { InputHandlersProvider } from "./logic/input-handlers.js";
+import { HandlersCompositionProvider } from "./logic/handlers-composition.js";
 import { DefineInputTypeProvider } from "./logic/define-input-type.js";
 
 export function App() {
@@ -15,7 +15,7 @@ export function App() {
 
   return (
     <StoreProvider>
-      <InputHandlersProvider>
+      <HandlersCompositionProvider>
         <DefineInputTypeProvider>
 
           <div id='app'>
@@ -25,7 +25,7 @@ export function App() {
           </div>
           
         </DefineInputTypeProvider>
-      </InputHandlersProvider>
+      </HandlersCompositionProvider>
     </StoreProvider>
   );
 }
