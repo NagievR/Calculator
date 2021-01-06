@@ -1,27 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
 
 #app {
-  /* user-select: none; */
-
-  font-family: 'Roboto Condensed', sans-serif;
-  font-weight: 300;
-
-  position: relative;
-
-  overflow: hidden;
-
-  /* min-width: 334px; */
-  width: 334px;
-
-  /* min-height: 334px; */
-  height: 600px;
-
-  border: 1px #979797 solid;
-  background-color: #ece9e9;
-  border-radius: 4px;
-
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
+  
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 300;
+  position: relative;
+  overflow: hidden;
+  width: 334px;
+  height: 600px;
+  border: 1px #979797 solid;
+  background-color: rgb(236, 233, 233, 0.75);
+  border-radius: 4px;
+  box-shadow: 0px 0px 20px 7px rgba(0,0,0,0.3);  
 }
