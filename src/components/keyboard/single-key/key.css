@@ -3,7 +3,7 @@
   cursor: pointer;
   width: 80px;
   height: 80px;
-  background-color: #C4C4C4;
+  background-color: #b6b3b3;
   margin-right: 2px;
   margin-bottom: 2px;
   display: flex;
@@ -13,7 +13,7 @@
   border-radius: 3px;
 }
 .key:active {
-  background-color: #afaeae;
+  background-color: #8b8b8b;
 }
 
 .math-operator {
@@ -21,7 +21,7 @@
   color: #F1F1F1;
 }
 .math-operator:active {
-  background-color: #FF9D40;
+  background-color: #ffac5e;
 }
 
 .double-key {

@@ -4,7 +4,7 @@
   outline: none;
   width: 100%;
   position: relative;
-  background-color: #cfcece;
+  background-color: #c0c0c0;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   color: #333333;
@@ -15,7 +15,7 @@
 
 #switcher-btn:hover {
   transition: 300ms;
-  background-color: #C4C4C4;
+  background-color: #b6b3b3;
 }
 
 #switcher-btn-wrap {
