@@ -17,15 +17,14 @@ export function currentInputNumber(store) {
   }
 
   return {
-    inputHandler(num) {
+    numberHandler(num) {
       if (isEndOfCalculations(num)) {
         return;
       };
       const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length; 
       const numbersAmount = countNumbersAmount(currentNumber);
-    
       if ((numbersAmount >= maxNumberLength) ||
-        (!currentNumber.length && num === 0)) {
+        (currentNumber[0] === '0' && num === '0')) {
         return;
       }
       setCurrentResult('');
@@ -61,12 +60,13 @@ export function currentInputNumber(store) {
       } else {
         setCurrentNumber(prev => prev.slice(0, prev.length - 1));
       }
-    }
+    },
+
   };
 }
 
 function countNumbersAmount(str) {
-  const splitted = String(str).split('');
+  const splitted = str.split('');
   const onlyNumbers = splitted.filter(it => !isNaN(it));
   return onlyNumbers.length;
 }
