@@ -7,7 +7,6 @@ export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
   const hideIcon = '×';
   const [iconToShow, setIconToShow] = useState(showIcon);
 
-
   useEffect(() => {
     if (!switcherDisplaying) {
       setIconToShow(showIcon);

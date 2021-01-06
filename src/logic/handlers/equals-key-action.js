@@ -12,11 +12,9 @@ export function equalsKeyAction(store) {
 
   return {
     equalsKeyHandler() {
-      console.log('aa');
-      if (!operatorsStack.length) { // ================
+      if (!operatorsStack.length) {
         return;
-      }
-      if (!currentNumber) {
+      } else if (!currentNumber) {
         operatorsStack.pop();
         setLog(prev => prev.slice(0, prev.length - 1));
       } else {
