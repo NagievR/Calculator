@@ -7,13 +7,13 @@ export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
   const hideIcon = '×';
   const [iconToShow, setIconToShow] = useState(showIcon);
 
-  // eslint-disable-next-line
+
   useEffect(() => {
     if (!switcherDisplaying) {
       setIconToShow(showIcon);
       setJournalDisplaying(false);
     } 
-  });
+  }, [setJournalDisplaying, switcherDisplaying]);
 
   function toggleIcon(e) {
     setIconToShow( e.target.textContent === showIcon ? hideIcon : showIcon );
