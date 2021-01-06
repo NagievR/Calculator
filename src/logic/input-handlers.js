@@ -1,7 +1,8 @@
-import React, { useContext, useRef } from 'react';
-import { operatorsManager, calculate } from "./calculate.js";
+import React, { useContext } from 'react';
 import { useStore } from "./store.js";
-import { currentInputNumber,  } from './handlers/current-input-number.js';
+import { calculate } from "./calculate.js";
+import { currentInputNumber } from './handlers/current-input-number.js';
+import { mathOperatorsAction } from './handlers/math-operator-action.js';
 
 const Context = React.createContext();
 export function useInputHandlers() {
@@ -9,71 +10,31 @@ export function useInputHandlers() {
 }
 
 export function InputHandlersProvider({ children }) {
+  const store = useStore();
   const { 
     currentNumber,
     setCurrentNumber, 
     setCurrentResult,
-    log,
+    // log,
     setLog,
     numbersStack,
     operatorsStack,
     clearStore,
   } = useStore();
-
-  const store = useStore();
-  
-  function clearKeyHandler() {
-    clearStore();
-  }
   
   const {
-    inputHandler,
+    numberHandler,
     floatKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
   } = currentInputNumber(store);
 
-
-
-  let savedNumbersStack = useRef(null);
-  let savedOperatorsStack = useRef(null);
-
-  function changeOperator(op) {
-    if (op.value === log[log.length - 1] || !log.length) {
-      return;
-    }
-    numbersStack.length = 0;
-    numbersStack.push(...savedNumbersStack.current);
-
-    operatorsStack.length = 0;
-    operatorsStack.push(...savedOperatorsStack.current);
-    
-    setLog(prev => prev.slice(0, prev.length - 1));
-    setLog(prev => prev.concat(op.value));
-    
-    operatorsManager(op, operatorsStack, numbersStack);
-    setCurrentResult(numbersStack[numbersStack.length - 1]);
-  }
-
-  function mathOperatorsHandler(op) {
-    if (!currentNumber && isNaN(log[log.length - 1])) {
-      changeOperator(op);
-      return;
-    }
-    setLog(prev => prev.concat(currentNumber, op.value));
-
-    numbersStack.push(Number(currentNumber));
-    setCurrentNumber('');
-
-    savedNumbersStack.current = numbersStack.slice();
-    savedOperatorsStack.current = operatorsStack.slice();
-    
-    operatorsManager(op, operatorsStack, numbersStack);
-    setCurrentResult(numbersStack[numbersStack.length - 1]);
-  }
+  const { 
+    mathOperatorHandler,
+  } = mathOperatorsAction(store);
 
   function equalsKeyHandler() {
-    if (!operatorsStack.length) {
+    if (!operatorsStack.length) { // ================
       return;
     }
     if (!currentNumber) {
@@ -88,18 +49,17 @@ export function InputHandlersProvider({ children }) {
     setCurrentResult(numbersStack[numbersStack.length - 1]);
     setCurrentNumber(String(numbersStack[numbersStack.length - 1]));
   }
-
   
-  // ****** current number handlers ******
-
-  // -------/current number handlers
+  function clearKeyHandler() {
+    clearStore();
+  }
 
   const context = {
-    inputHandler,
+    numberHandler,
     floatKeyHandler,
     negateKeyHandler,
     deleteKeyHandler,
-    mathOperatorsHandler,
+    mathOperatorHandler,
     equalsKeyHandler,
     clearKeyHandler,
   };
