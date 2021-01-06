@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './keys-row.css';
+import './keyboard.css';
 
 export function KeysRow({ children }) {
   return (

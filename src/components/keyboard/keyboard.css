@@ -5,3 +5,7 @@
   flex-wrap: wrap;
   margin-bottom: 4px;
 }
+
+#keys-row {
+  display: flex;
+}
