@@ -7,12 +7,16 @@ import { useStore } from "../../../logic/store.js";
 export function Result() {
   const resultRef = useRef();
   const { currentNumber, currentResult } = useStore();
-  let result = formateResult(currentResult);
+  const result = setVisibleFloatLength(currentResult, 4);
 
-  function defineOutput() {
-    return (result !== '' && formateOutput(result)) 
-      || formateOutput(currentNumber) 
-      || '0';
+  function defineOutputSource() {
+    if (result !== '') {
+      return formateUserInput(result);
+    } else if (currentNumber !== '') {
+      return formateUserInput(currentNumber);
+    } else {
+      return '0';
+    }
   }
 
   return (
@@ -20,21 +24,30 @@ export function Result() {
       mode="single"
       max={80}>
       <div className={`output-elem-wrap`}>   
-        <span ref={resultRef} id='result'>{defineOutput()}</span>
+        <span ref={resultRef} id='result'>{defineOutputSource()}</span>
       </div>
     </Textfit>
   );
 }
 
-function formateOutput(num, splitBy = '.') {
+function formateUserInput(num, splitBy = '.') {
   const number = String(num);
   const [int, float] = number.split(splitBy);
   const intReadable = Number(int).toLocaleString();
   const formatted = `${intReadable}${splitBy}${float}`;
-  
   return number.includes(splitBy) ? formatted : intReadable;
 }
 
-function formateResult(num) {
-  return Number.isInteger(Number(num)) ? num : num.toFixed(4);
+function setVisibleFloatLength(num, maxFloatLength = 2) {
+  if (Number.isInteger(Number(num))) {
+    return num;
+  }
+  let numFixed = num.toFixed(maxFloatLength);
+  for (let i = numFixed.length-1; i > 0; i--) {
+    if (numFixed[i] !== '0') {
+      break;
+    }
+    numFixed = numFixed.slice(0, i)
+  }
+  return numFixed;
 }
