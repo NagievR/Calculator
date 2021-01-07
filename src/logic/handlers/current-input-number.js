@@ -7,18 +7,18 @@ export function currentInputNumber(store) {
     clearStore,
   } = store;
 
-  function isEndOfCalculations(num) {
+  function isEndOfCalculations() {
     if (log[log.length - 1] !== '=') {
       return false;
     } 
     clearStore();
-    setCurrentNumber(prev => prev += num);
     return true;
   }
 
   return {
     numberHandler(num) {
       if (isEndOfCalculations(num)) {
+        setCurrentNumber(prev => prev += num);
         return;
       };
       const maxNumberLength = String(Number.MAX_SAFE_INTEGER).length; 
@@ -54,8 +54,10 @@ export function currentInputNumber(store) {
     },
 
     deleteKeyHandler() {
-      setCurrentResult('');
-      if (currentNumber.includes('-') && currentNumber.length === 2) {
+      setCurrentResult(''); // ===========
+      if (isEndOfCalculations()) {
+        return;
+      } else if (currentNumber.includes('-') && currentNumber.length === 2) {
         setCurrentNumber('');
       } else {
         setCurrentNumber(prev => prev.slice(0, prev.length - 1));
