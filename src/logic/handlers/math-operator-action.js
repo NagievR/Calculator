@@ -14,6 +14,11 @@ export function mathOperatorsAction(store) {
     operatorsStack,
   } = store;
 
+  function calcAndAddResult(op) {
+    const intermediateRes = operatorsManager(op, operatorsStack, numbersStack);
+    setCurrentResult(intermediateRes ?? '');
+  }
+
   function changeOperator(op) {
     if (op.value === log[log.length - 1] || !log.length) {
       return;
@@ -24,9 +29,7 @@ export function mathOperatorsAction(store) {
     operatorsStack.push(...savedOperatorsStack);
     
     setLog(prev => prev.slice(0, prev.length - 1).concat(op.value));
-    
-    operatorsManager(op, operatorsStack, numbersStack);
-    setCurrentResult(numbersStack[numbersStack.length - 1]);
+    calcAndAddResult(op);
   }
   
   return {
@@ -43,8 +46,7 @@ export function mathOperatorsAction(store) {
       savedNumbersStack = numbersStack.slice();
       savedOperatorsStack = operatorsStack.slice();
       
-      operatorsManager(op, operatorsStack, numbersStack);
-      setCurrentResult(numbersStack[numbersStack.length - 1]);
+      calcAndAddResult(op);
     }, 
  
   };

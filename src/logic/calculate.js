@@ -3,20 +3,24 @@ export function operatorsManager(currOp, operators, numbers) {
     operators.push(currOp);
     return;
   }
+  
+  let intermediateResult = null;
 
   const prevOp = operators[operators.length - 1];
   if (prevOp.priority < currOp.priority) {
     operators.push(currOp);
   } else {
-    calculate(operators, numbers);
+    intermediateResult = calculate(operators, numbers);
     operators.push(currOp);
   }
 
   if (operators[1] && (operators[0].priority === operators[1].priority)) {
     const lastOpSaved = operators.pop();
-    calculate(operators, numbers);
+    intermediateResult = calculate(operators, numbers);
     operators.push(lastOpSaved);
   }
+
+  return intermediateResult;
 };
 
 export function calculate(operators, numbers, iterations = 1) {
@@ -27,4 +31,5 @@ export function calculate(operators, numbers, iterations = 1) {
     numbers.push(sum);
     iterations--;
   }
+  return numbers[numbers.length - 1];
 } 

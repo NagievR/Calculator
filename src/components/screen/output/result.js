@@ -7,13 +7,21 @@ import { useStore } from "../../../logic/store.js";
 export function Result() {
   const resultRef = useRef();
   const { currentNumber, currentResult } = useStore();
-  const result = setVisibleFloatLength(currentResult, 4);
+
+  // console.log(`currentNumber: ${currentNumber}\ncurrentResult:${currentResult}\n***********`);
+
+  let className = 'intermediate-res';
+  if (currentNumber !== '') {
+    className = '';
+  }
 
   function defineOutputSource() {
-    if (result !== '') {
-      return formateUserInput(result);
+    if (currentResult !== '') {
+      let floatCorrected = setVisibleFloatLength(currentResult, 4);
+      return formateUserInput(floatCorrected);
     } else if (currentNumber !== '') {
-      return formateUserInput(currentNumber);
+      let floatCorrected = setVisibleFloatLength(currentNumber);
+      return formateUserInput(floatCorrected);
     } else {
       return '0';
     }
@@ -24,25 +32,31 @@ export function Result() {
       mode="single"
       max={80}>
       <div className={`output-elem-wrap`}>   
-        <span ref={resultRef} id='result'>{defineOutputSource()}</span>
+        <span 
+          ref={resultRef} 
+          className={className} 
+          id='result'>
+          {defineOutputSource()}
+        </span>
       </div>
     </Textfit>
   );
 }
 
 function formateUserInput(num, splitBy = '.') {
-  const number = String(num);
-  const [int, float] = number.split(splitBy);
+  const numberStringified = String(num);
+  const [int, float] = numberStringified.split(splitBy);
   const intReadable = Number(int).toLocaleString();
   const formatted = `${intReadable}${splitBy}${float}`;
-  return number.includes(splitBy) ? formatted : intReadable;
+  return numberStringified.includes(splitBy) ? formatted : intReadable;
 }
 
-function setVisibleFloatLength(num, maxFloatLength = 2) {
+function setVisibleFloatLength(num, maxFloatLength = 8) {
+  num = String(num);
   if (Number.isInteger(Number(num))) {
     return num;
   }
-  let numFixed = num.toFixed(maxFloatLength);
+  let numFixed = Number(num).toFixed(maxFloatLength);
   for (let i = numFixed.length-1; i > 0; i--) {
     if (numFixed[i] !== '0') {
       break;

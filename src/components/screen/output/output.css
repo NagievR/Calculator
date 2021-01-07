@@ -13,6 +13,10 @@
 #result {
   line-height: 10vh;
 }
+.intermediate-res {
+  color: gray;
+  /* opacity: 0.5; */
+}
 
 .output-elem-wrap {
   border-radius: 2px;

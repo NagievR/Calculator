@@ -4,7 +4,7 @@ export function equalsKeyAction(store) {
   const { 
     currentNumber,
     setCurrentNumber, 
-    setCurrentResult,
+    // setCurrentResult,
     setLog,
     numbersStack,
     operatorsStack,
@@ -25,8 +25,8 @@ export function equalsKeyAction(store) {
 
       calculate(operatorsStack, numbersStack, operatorsStack.length);
 
-      setCurrentResult(numbersStack[numbersStack.length - 1]);
-      setCurrentNumber(numbersStack[numbersStack.length - 1]);
+      // setCurrentResult(numbersStack[numbersStack.length - 1]);
+      setCurrentNumber(String(numbersStack[numbersStack.length - 1]));
     },
 
   };
