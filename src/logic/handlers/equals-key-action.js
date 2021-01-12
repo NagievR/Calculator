@@ -4,7 +4,7 @@ export function equalsKeyAction(store) {
   const { 
     currentNumber,
     setCurrentNumber, 
-    // setCurrentResult,
+    setResult,
     setLog,
     numbersStack,
     operatorsStack,
@@ -14,19 +14,21 @@ export function equalsKeyAction(store) {
     equalsKeyHandler() {
       if (!operatorsStack.length) {
         return;
+        
       } else if (!currentNumber) {
-        operatorsStack.pop();
-        setLog(prev => prev.slice(0, prev.length - 1));
+        setLog(prev => prev.concat('0')); 
+        numbersStack.push(0); 
+        
       } else {
         numbersStack.push(Number(currentNumber));
         setLog(prev => prev.concat(currentNumber));
       }
+      
       setLog(prev => prev.concat('='));
 
-      calculate(operatorsStack, numbersStack, operatorsStack.length);
-
-      // setCurrentResult(numbersStack[numbersStack.length - 1]);
-      setCurrentNumber(String(numbersStack[numbersStack.length - 1]));
+      const res = calculate(operatorsStack, numbersStack, operatorsStack.length);
+      setResult(String(res));
+      setCurrentNumber(String(res));
     },
 
   };

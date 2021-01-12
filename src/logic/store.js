@@ -9,9 +9,12 @@ export function StoreProvider({ children }) {
   const numbersStack = useRef([]);  
   const operatorsStack = useRef([]);
 
-  const [currentResult, setCurrentResult] = useState('');
   const [currentNumber, setCurrentNumber] = useState('');
+  const [result, setResult] = useState('');
+  const [interimResult, setInterimResult] = useState('');
   const [log, setLog] = useState([]);
+
+  const separateFloatBy = '.';
 
   const operatorsAction = {
     '÷': {value: '÷', priority: 2, doOperation: (a, b) => a / b },
@@ -24,15 +27,19 @@ export function StoreProvider({ children }) {
     operatorsStack.current.length = 0;
     numbersStack.current.length = 0;
     setCurrentNumber('');
-    setCurrentResult('');
+    setResult('');
+    setInterimResult('');
     setLog([]);
   }
 
   const context = {
+    separateFloatBy,
     currentNumber,
     setCurrentNumber,
-    currentResult,
-    setCurrentResult,
+    result,
+    setResult,
+    interimResult,
+    setInterimResult,
     log,
     setLog,
     operatorsAction,

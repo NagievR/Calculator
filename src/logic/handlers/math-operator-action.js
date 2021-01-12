@@ -6,47 +6,54 @@ let savedOperatorsStack = null;
 export function mathOperatorsAction(store) {
   const { 
     currentNumber,
-    setCurrentNumber, 
-    setCurrentResult,
+    setCurrentNumber,
+    setResult,
+    result, 
+    setInterimResult,
     log,
     setLog,
     numbersStack,
     operatorsStack,
   } = store;
 
-  function calcAndAddResult(op) {
-    const intermediateRes = operatorsManager(op, operatorsStack, numbersStack);
-    setCurrentResult(intermediateRes ?? '');
+  function calcInterimResult(op) {
+    const res = operatorsManager(op, operatorsStack, numbersStack);
+    setInterimResult(String(res ?? ''));
   }
 
   function changeOperator(op) {
-    if (op.value === log[log.length - 1] || !log.length) {
+    const isSameOperator = op.value === log[log.length - 1];
+    if (isSameOperator || !log.length) {
       return;
     }
+    setLog(prev => prev.slice(0, prev.length - 1).concat(op.value));
     numbersStack.length = 0;
     operatorsStack.length = 0;
+
     numbersStack.push(...savedNumbersStack);
     operatorsStack.push(...savedOperatorsStack);
-    
-    setLog(prev => prev.slice(0, prev.length - 1).concat(op.value));
-    calcAndAddResult(op);
+
+    calcInterimResult(op);
   }
   
   return {
     mathOperatorHandler(op) {
-      if (!currentNumber && isNaN(log[log.length - 1])) {
+      if (!currentNumber) {
         changeOperator(op);
         return;
-      }
-      setLog(prev => prev.concat(currentNumber, op.value));
-  
-      numbersStack.push(Number(currentNumber));
+      } 
+      const number = result || currentNumber;
+      setLog(prev => prev.concat(number, op.value));
+      numbersStack.push(Number(number));
+
+      setResult('');
       setCurrentNumber('');
-  
+      setInterimResult('');
+
       savedNumbersStack = numbersStack.slice();
       savedOperatorsStack = operatorsStack.slice();
       
-      calcAndAddResult(op);
+      calcInterimResult(op);
     }, 
  
   };
