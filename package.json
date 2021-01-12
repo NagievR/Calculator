@@ -1,6 +1,6 @@
 {
   "homepage": "https://nagievr.github.io/Calculator",
-  "name": "calculcator",
+  "name": "Calculator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
