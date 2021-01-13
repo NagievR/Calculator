@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
 
 #app {
+  -webkit-tap-highlight-color: transparent;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
