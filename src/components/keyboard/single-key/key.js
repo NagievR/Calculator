@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './key.css';
-import { useDefineInputType } from "../../../logic/define-input-type.js";
+import { useDefineInputType } from "../../../logic/providers/define-input-type.js";
 
 export function Key ({ value, className }) {
   const { defineInputType } = useDefineInputType();

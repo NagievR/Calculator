@@ -2,7 +2,7 @@ import { React, useRef } from 'react';
 import { Textfit } from 'react-textfit';
 
 import './output.css';
-import { useStore } from "../../../logic/store.js";
+import { useStore } from "../../../logic/providers/store.js";
 
 export function Result() {
   const numberContainerRef = useRef();
@@ -14,8 +14,8 @@ export function Result() {
   } = useStore();
 
   // ======== testing
-  console.clear();
-  console.log(`currentNumber: ${currentNumber}\ninterimResult:${interimResult}\nresult:${result}\n***********`);
+  // console.clear();
+  // console.log(`currentNumber: ${currentNumber}\ninterimResult:${interimResult}\nresult:${result}\n***********`);
   if (typeof currentNumber !== 'string' 
     || typeof result !== 'string'
     || typeof result !== 'string' 

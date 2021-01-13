@@ -1,7 +1,7 @@
 import {React, useState, useEffect, useRef} from 'react';
 
 import './output.css';
-import { useStore } from "../../../logic/store.js";
+import { useStore } from "../../../logic/providers/store.js";
 
 export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
   const [isOversized, setIsOversized] = useState(false);

@@ -6,7 +6,7 @@ import { Keyboard } from './components/keyboard/keyboard.js';
 import { Journal } from './components/journal/journal.js';
 
 import { handleKeyboardEvent } from "./logic/keyboard-events.js";
-import { useDefineInputType } from "./logic/define-input-type.js";
+import { useDefineInputType } from "./logic/providers/define-input-type.js";
 
 export function App() {
   const [journalDisplaying, setJournalDisplaying] = useState(false);
@@ -24,8 +24,8 @@ export function App() {
     if (key) {
       defineInputType(key);
       setCurrentKey(null);
-    }
-  }, [currentKey, defineInputType]);
+    } // eslint-disable-next-line
+  }, [currentKey]);
 
   return (
     <div id='app'>

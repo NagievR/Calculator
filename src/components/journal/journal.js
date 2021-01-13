@@ -1,7 +1,7 @@
 import { React } from 'react';
 
 import './journal.css';
-import { useStore } from "../../logic/store.js";
+import { useStore } from "../../logic/providers/store.js";
 
 export function Journal({ display }) {
   const { log } = useStore();
