@@ -6,6 +6,7 @@ export function useStore() {
 }
 
 export function StoreProvider({ children }) {
+  
   const numbersStack = useRef([]);  
   const operatorsStack = useRef([]);
 
@@ -21,6 +22,13 @@ export function StoreProvider({ children }) {
     '×': {value: '×', priority: 2, doOperation: (a, b) => a * b },
     '−': {value: '−', priority: 1, doOperation: (a, b) => a - b }, 
     '+': {value: '+', priority: 1, doOperation: (a, b) => a + b },
+  };
+  const symbols = {
+    equals: '=',
+    clearAll: 'c',
+    remove: '⌫',
+    negate: '±',
+    float: '.',
   };
 
   function clearStore() {
@@ -42,9 +50,10 @@ export function StoreProvider({ children }) {
     setInterimResult,
     log,
     setLog,
-    operatorsAction,
     numbersStack: numbersStack.current,
     operatorsStack: operatorsStack.current,
+    symbols,
+    operatorsAction,
     clearStore,
   };
 

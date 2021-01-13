@@ -8,14 +8,11 @@ export function useDefineInputType() {
 }
 
 export function DefineInputTypeProvider({ children }) {
-  const symbols = {
-    equals: '=',
-    clearAll: 'c',
-    remove: '⌫',
-    negate: '±',
-    float: '.',
-  };
-  const { operatorsAction } = useStore();
+  const { 
+    symbols,
+    operatorsAction, 
+  } = useStore();
+
   const { 
     mathOperatorHandler, 
     numberHandler,
