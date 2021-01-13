@@ -1,31 +1,37 @@
-import { React, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './app.css';
 import { Screen } from './components/screen/screen.js';
 import { Keyboard } from './components/keyboard/keyboard.js';
 import { Journal } from './components/journal/journal.js';
 
-// providers
-import { StoreProvider } from "./logic/store.js";
-import { HandlersCompositionProvider } from "./logic/handlers-composition.js";
-import { DefineInputTypeProvider } from "./logic/define-input-type.js";
+import { handleKeyboardEvent } from "./logic/keyboard-events.js";
+import { useDefineInputType } from "./logic/define-input-type.js";
 
 export function App() {
   const [journalDisplaying, setJournalDisplaying] = useState(false);
+  const [currentKey, setCurrentKey] = useState(null);
+  const { defineInputType } = useDefineInputType();
+
+  useEffect(() => {
+    const handler = e => setCurrentKey(e.key);
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
+
+  useEffect(() => {
+    const key = handleKeyboardEvent(currentKey);
+    if (key) {
+      defineInputType(key);
+      setCurrentKey(null);
+    }
+  }, [currentKey, defineInputType]);
 
   return (
-    <StoreProvider>
-      <HandlersCompositionProvider>
-        <DefineInputTypeProvider>
-
-          <div id='app'>
-            <Screen setJournalDisplaying={setJournalDisplaying} />
-            <Keyboard />
-            <Journal display={journalDisplaying} />
-          </div>
-          
-        </DefineInputTypeProvider>
-      </HandlersCompositionProvider>
-    </StoreProvider>
+    <div id='app'>
+      <Screen setJournalDisplaying={setJournalDisplaying} />
+      <Keyboard />
+      <Journal display={journalDisplaying} />
+    </div>     
   );
 }
