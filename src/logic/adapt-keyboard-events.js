@@ -1,6 +1,7 @@
 const changeInto = {
   'Delete': 'c',
   'Escape': 'c',
+  'Shift': '±',
   'Backspace': '⌫',
   'Enter': '=',
   '/': '÷',
