@@ -1,4 +1,4 @@
-import { calculate } from "../calculate.js";
+import { calculate } from "../calculator-core.js";
 
 export function equalsKeyAction(store) {
   const { 

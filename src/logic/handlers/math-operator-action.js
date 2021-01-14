@@ -1,4 +1,4 @@
-import { operatorsManager } from "../calculate.js";
+import { operatorsManager } from "../calculator-core.js";
 
 let savedNumbersStack = null;
 let savedOperatorsStack = null;

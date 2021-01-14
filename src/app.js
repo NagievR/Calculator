@@ -5,11 +5,13 @@ import { Screen } from './components/screen/screen.js';
 import { Keyboard } from './components/keyboard/keyboard.js';
 import { Journal } from './components/journal/journal.js';
 
-import { handleKeyboardEvent } from "./logic/keyboard-events.js";
+import { handleKeyboardEvent } from "./logic/adapt-keyboard-events.js";
 import { useDefineInputType } from "./logic/providers/define-input-type.js";
 
 export function App() {
   const [journalDisplaying, setJournalDisplaying] = useState(false);
+  
+  // generate and handle events from the keyboard
   const [currentKey, setCurrentKey] = useState(null);
   const { defineInputType } = useDefineInputType();
 
