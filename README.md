@@ -24,5 +24,10 @@ description...
     <td> <kbd> ← Backspace </kbd> </td>
     <td> remove a symbol </td>
   </tr>
+  
+  <tr>
+    <td> <kbd> Shift </kbd> </td>
+    <td> negative number </td>
+  </tr>
 </table>
 
