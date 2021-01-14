@@ -1,4 +1,4 @@
-import { React } from 'react';
+import React from 'react';
 
 import './journal.css';
 import { useStore } from "../../logic/providers/store.js";

@@ -17,6 +17,7 @@
 }
 
 .math-operator {
+  /* background-image: linear-gradient(to right, #ff7a00, #ff7f00, #ff8300, #ff8800, #ff8c00); */
   background-color: #ff8c00;
   color: #F1F1F1;
 }
