@@ -43,7 +43,7 @@ export function mathOperatorsAction(store) {
         return;
       } 
       const number = result || currentNumber;
-      setLog(prev => prev.concat(number, op.value));
+      setLog(prev => prev.concat(parseFloat(number), op.value));
       numbersStack.push(Number(number));
 
       setResult('');
