@@ -1,4 +1,4 @@
-.key, .double-key {
+.key, .double_key {
   user-select: none;
   cursor: pointer;
   width: 80px;
@@ -16,16 +16,15 @@
   background-color: #8b8b8b;
 }
 
-.math-operator {
-  /* background-image: linear-gradient(to right, #ff7a00, #ff7f00, #ff8300, #ff8800, #ff8c00); */
+.math_operator {
   background-color: #ff8c00;
   color: #F1F1F1;
 }
-.math-operator:active {
+.math_operator:active {
   background-color: #ffac5e;
 }
 
-.double-key {
+.double_key {
   width: 162px;
 }
 

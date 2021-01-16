@@ -1,6 +1,6 @@
 import {React, useState, useEffect, useRef} from 'react';
+import styles from './output.module.css';
 
-import './output.css';
 import { useStore } from "../../../logic/providers/store.js";
 
 export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
@@ -18,10 +18,15 @@ export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
     }
   }, [log, setSwitcherDisplaying, displayWidth]);
 
+  const oversizedCheck = () => isOversized ? styles.oversized : '';
+
   return (
-    <div className='log-margin-bottom'>
-      <div className={`output-elem-wrap ${isOversized ? 'oversized' : ''}`}>
-        <span ref={logContainerRef} id='log'>{log.join(' ')}</span>
+    <div className={styles.log_margin_bottom}>
+      <div className={`${styles.output_elem_wrap} ${oversizedCheck()}`}>
+        <span 
+          ref={logContainerRef} 
+          id={styles.log}
+          >{log.join(' ')}</span>
       </div>
     </div>
   );

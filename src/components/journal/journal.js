@@ -1,6 +1,6 @@
 import React from 'react';
+import styles from './journal.module.css';
 
-import './journal.css';
 import { useStore } from "../../logic/providers/store.js";
 
 export function Journal({ display }) {
@@ -13,8 +13,8 @@ export function Journal({ display }) {
   }
 
   return (
-    <div id='journal-container' style={toggleDisplaying()}>
-      <div id='journal'>{log.join(' ')} </div>
+    <div id={styles.container} style={toggleDisplaying()}>
+      <div id={styles.journal}>{log.join(' ')} </div>
     </div>
   );
 }

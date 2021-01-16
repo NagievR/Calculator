@@ -1,9 +1,10 @@
 import React from 'react';
-
-import './keyboard.css';
+import styles from './keyboard.module.css';
 
 export function KeysRow({ children }) {
   return (
-    <div id='keys-row'>{children}</div>
+    <div className={styles.keys_row}>
+      {children}
+    </div>
   );
 }

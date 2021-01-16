@@ -1,7 +1,7 @@
-import { React, useRef } from 'react';
-import { Textfit } from 'react-textfit';
+import React, { useRef } from 'react';
+import styles from './output.module.css';
 
-import './output.css';
+import { Textfit } from 'react-textfit';
 import { useStore } from "../../../logic/providers/store.js";
 
 export function Result() {
@@ -12,17 +12,6 @@ export function Result() {
     interimResult, 
     result, 
   } = useStore();
-
-  // ======== testing
-  // console.clear();
-  // console.log(`currentNumber: ${currentNumber}\ninterimResult:${interimResult}\nresult:${result}\n***********`);
-  if (typeof currentNumber !== 'string' 
-    || typeof result !== 'string'
-    || typeof result !== 'string' 
-  ) {
-      alert('Error');
-  }
-  // ================
 
   function defineOutputSource() {
     if (interimResult) {
@@ -41,15 +30,19 @@ export function Result() {
     }
   }
 
+  function isInterimResultCheck() {
+    return (currentNumber || result) ? '' : styles.intermediate_res;
+  };
+
   return (
     <Textfit 
       mode="single"
       max={80}>
-      <div className={`output-elem-wrap`}>   
+      <div className={styles.output_elem_wrap}>   
         <span 
           ref={numberContainerRef} 
-          className={currentNumber || result ? '' : 'intermediate-res'} 
-          id='result'>
+          className={isInterimResultCheck()} 
+          id={styles.result}>
           {defineOutputSource()}
         </span>
       </div> 

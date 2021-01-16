@@ -1,40 +1,40 @@
 import React from 'react';
+import styles from './keyboard.module.css';
 
-import './keyboard.css';
 import { KeysRow } from './keys-row.js'
 import { Key } from './single-key/key.js'
 
 export function Keyboard() {
   return ( 
-    <div id='keyboard'>
+    <div id={styles.keyboard}>
       <KeysRow>
-        <Key value={'c'} className={'key double-key'} />
-        <Key value={'⌫'} className={'key delete'}  />
-        <Key value={'÷'} className={'key math-operator'} />
+        <Key value={'c'} className={'double_key'} />
+        <Key value={'⌫'} className={'delete'}  />
+        <Key value={'÷'} className={'math_operator'} />
       </KeysRow>
       <KeysRow>
-        <Key value={7} className={'key'} />
-        <Key value={8} className={'key'} />       
-        <Key value={9} className={'key'} />
-        <Key value={'×'} className={'key math-operator'} />
+        <Key value={'7'} />
+        <Key value={'8'} />       
+        <Key value={'9'} />
+        <Key value={'×'} className={'math_operator'} />
       </KeysRow>
       <KeysRow>
-        <Key value={4} className={'key'} />
-        <Key value={5} className={'key'} />       
-        <Key value={6} className={'key'} />
-        <Key value={'−'} className={'key math-operator'} />
+        <Key value={'4'} />
+        <Key value={'5'} />       
+        <Key value={'6'} />
+        <Key value={'−'} className={'math_operator'} />
       </KeysRow>
       <KeysRow>
-        <Key value={1} className={'key'} />
-        <Key value={2} className={'key'} />       
-        <Key value={3} className={'key'} />
-        <Key value={'+'} className={'key math-operator'} />
+        <Key value={'1'} />
+        <Key value={'2'} />       
+        <Key value={'3'} />
+        <Key value={'+'} className={'math_operator'} />
       </KeysRow>
       <KeysRow>
-        <Key value={'±'} className={'key'} />
-        <Key value={0} className={'key'} />       
-        <Key value={'.'} className={'key'} />
-        <Key value={'='} className={'key math-operator'} />
+        <Key value={'±'} />
+        <Key value={'0'} />       
+        <Key value={'.'} />
+        <Key value={'='} className={'math_operator'} />
       </KeysRow>
     </div>
   );

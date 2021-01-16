@@ -1,4 +1,4 @@
-#switcher-btn {
+#switcher_btn {
   border: none;
   cursor: pointer;
   width: 100%;
@@ -12,12 +12,12 @@
   transition: 400ms;
 }
 
-#switcher-btn:hover {
+#switcher_btn:hover {
   transition: 300ms;
-  background-color: #b6b3b3;
+  background-color: #adadad;
 }
 
-#switcher-btn-wrap {
+#wrapper {
   display: flex;
   justify-content: center;
   height: 28px;

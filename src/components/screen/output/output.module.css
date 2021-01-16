@@ -1,4 +1,4 @@
-#output-container {
+#output_container {
   margin-right: 5px;
   overflow: hidden;
   white-space: nowrap;  
@@ -14,11 +14,11 @@
   line-height: 80px;
 }
 
-.intermediate-res {
+.intermediate_res {
   color: rgb(167, 167, 167);
 }
 
-.output-elem-wrap {
+.output_elem_wrap {
   border-radius: 2px;
   display: flex;
   justify-content: flex-end;
@@ -28,6 +28,6 @@
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.33) 0%, rgba(236,233,233, 0) 10%);
 }
 
-.log-margin-bottom {
+.log_margin_bottom {
   margin-bottom: 35px;
 }

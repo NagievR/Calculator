@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import styles from './app.module.css';
 
-import './app.css';
 import { Screen } from './components/screen/screen.js';
 import { Keyboard } from './components/keyboard/keyboard.js';
 import { Journal } from './components/journal/journal.js';
@@ -30,7 +30,7 @@ export function App() {
   }, [currentKey]);
 
   return (
-    <div id='app'>
+    <div id={styles.app}>
       <Screen setJournalDisplaying={setJournalDisplaying} />
       <Keyboard />
       <Journal display={journalDisplaying} />

@@ -6,6 +6,6 @@
   margin-bottom: 4px;
 }
 
-#keys-row {
+.keys_row {
   display: flex;
 }

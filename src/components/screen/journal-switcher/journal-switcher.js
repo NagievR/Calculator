@@ -1,6 +1,5 @@
-import {React, useEffect, useState} from 'react';
-
-import './journal-switcher.css';
+import React, { useEffect, useState } from 'react';
+import styles from './journal-switcher.module.css';
 
 export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
   const iconOpen = '▲';
@@ -25,7 +24,7 @@ export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
     return switcherDisplaying ? {top: show} : {top: hide};
   }
 
-  // ======== handle journal switching from keyboard
+  // handle journal switching from keyboard
   const [switchJournal, setSwitchJournal] = useState(false);
 
   useEffect(() => {
@@ -45,9 +44,9 @@ export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
   }, [switchJournal]);
 
   return (
-    <div id='switcher-btn-wrap'>
+    <div id={styles.wrapper}>
       <button 
-        id='switcher-btn'
+        id={styles.switcher_btn}
         style={toggleDisplaying()}
         onClick={toggleIcon}
         onFocus={e => e.target.blur()}
