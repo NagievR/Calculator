@@ -6,17 +6,21 @@ import { useStore } from "../../../logic/providers/store.js";
 export function OperationsLog({ setSwitcherDisplaying, displayWidth }) {
   const [isOversized, setIsOversized] = useState(false);
   const logContainerRef = useRef();
-  const { log } = useStore();
+  const { log, history } = useStore();
 
   useEffect(() => {
-    if (logContainerRef.current.offsetWidth > displayWidth) {
-      setIsOversized(true);
+    if (logContainerRef.current.offsetWidth > displayWidth || history.length) {
       setSwitcherDisplaying(true);
     } else {
-      setIsOversized(false);
       setSwitcherDisplaying(false);
     }
-  }, [log, setSwitcherDisplaying, displayWidth]);
+    
+    if (logContainerRef.current.offsetWidth > displayWidth) {
+      setIsOversized(true);
+    } else {
+      setIsOversized(false);
+    }
+  }, [log, setSwitcherDisplaying, displayWidth, history]);
 
   const oversizedCheck = () => isOversized ? styles.oversized : '';
 
