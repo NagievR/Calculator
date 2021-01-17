@@ -39,7 +39,6 @@ function setToFixed(num, maxFloatLength = 6) {
     return num;
   }
   let fixed = Number(num).toFixed(maxFloatLength);
-  console.log(num);
 
   // remove all '0's from the end 
   for (let i = fixed.length-1; i > 2; i--) {
