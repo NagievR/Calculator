@@ -1,18 +1,26 @@
 import React, { useContext } from 'react';
 import { useHandlersComposition } from "./handlers-composition.js";
-import { useStore } from './store.js';
 
 const Context = React.createContext();
 export function useDefineInputType() {
   return useContext(Context);
 }
 
-export function DefineInputTypeProvider({ children }) {
-  const { 
-    symbols,
-    operatorsAction, 
-  } = useStore();
+const operatorsAction = {
+  '÷': {value: '÷', priority: 2, doOperation: (a, b) => a / b },
+  '×': {value: '×', priority: 2, doOperation: (a, b) => a * b },
+  '−': {value: '−', priority: 1, doOperation: (a, b) => a - b }, 
+  '+': {value: '+', priority: 1, doOperation: (a, b) => a + b },
+};
+const symbols = {
+  equals: '=',
+  clearAll: 'c',
+  remove: '⌫',
+  negate: '±',
+  float: '.',
+};
 
+export function DefineInputTypeProvider({ children }) {
   const { 
     mathOperatorHandler, 
     numberHandler,
