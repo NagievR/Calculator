@@ -20,7 +20,7 @@ export function operatorsManager(currOp, operators, numbers) {
     operators.push(lastOpSaved);
   }
 
-  return intermediateResult;
+  return setToFixed(intermediateResult);
 };
 
 export function calculate(operators, numbers, iterations = 1) {
@@ -31,5 +31,23 @@ export function calculate(operators, numbers, iterations = 1) {
     numbers.push(sum);
     iterations--;
   }
-  return numbers[numbers.length - 1];
+  return setToFixed(numbers[numbers.length - 1]);
 } 
+
+function setToFixed(num, maxFloatLength = 6) {
+  if (Number.isInteger(num) || num === null || String(num).includes('e')) {
+    return num;
+  }
+  let fixed = Number(num).toFixed(maxFloatLength);
+  console.log(num);
+
+  // remove all '0's from the end 
+  for (let i = fixed.length-1; i > 2; i--) {
+    if (fixed[i] !== '0') {
+      break;
+    }
+    fixed = fixed.slice(0, i);
+  }
+
+  return fixed;
+}
