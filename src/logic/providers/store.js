@@ -10,26 +10,12 @@ export function StoreProvider({ children }) {
   const numbersStack = useRef([]);  
   const operatorsStack = useRef([]);
 
+  const separateFloatBy = '.';
   const [currentNumber, setCurrentNumber] = useState('');
   const [result, setResult] = useState('');
   const [interimResult, setInterimResult] = useState('');
   const [log, setLog] = useState([]);
-
-  const separateFloatBy = '.';
-
-  const operatorsAction = {
-    '÷': {value: '÷', priority: 2, doOperation: (a, b) => a / b },
-    '×': {value: '×', priority: 2, doOperation: (a, b) => a * b },
-    '−': {value: '−', priority: 1, doOperation: (a, b) => a - b }, 
-    '+': {value: '+', priority: 1, doOperation: (a, b) => a + b },
-  };
-  const symbols = {
-    equals: '=',
-    clearAll: 'c',
-    remove: '⌫',
-    negate: '±',
-    float: '.',
-  };
+  const [history, setHistory] = useState([]);
 
   function clearStore() {
     operatorsStack.current.length = 0;
@@ -50,10 +36,10 @@ export function StoreProvider({ children }) {
     setInterimResult,
     log,
     setLog,
+    history,
+    setHistory,
     numbersStack: numbersStack.current,
     operatorsStack: operatorsStack.current,
-    symbols,
-    operatorsAction,
     clearStore,
   };
 
