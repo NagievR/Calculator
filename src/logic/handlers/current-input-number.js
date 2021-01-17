@@ -4,23 +4,26 @@ export function currentInputNumber(store) {
     currentNumber,
     setCurrentNumber, 
     setInterimResult,
+    result,
     setResult,
     log,
+    setHistory,
     clearStore,
   } = store;
 
-  function isItEndOfExpression(num = '') {
+  function isEndOfExpression(num = '') {
     if (log[log.length - 1] !== '=') {
       return false;
     }
     clearStore();
+    setHistory(prev => prev.concat([[log.join(' '), result]]));
     setCurrentNumber(String(num));
     return true;
   }
 
   return {
     numberHandler(num) {
-      if (isItEndOfExpression(num)) {
+      if (isEndOfExpression(num)) {
         return;
       } 
       setInterimResult('');
@@ -44,7 +47,7 @@ export function currentInputNumber(store) {
 
     floatKeyHandler() {
       if (currentNumber.includes(separateFloatBy) || 
-        isItEndOfExpression('0' + separateFloatBy)) {
+        isEndOfExpression('0' + separateFloatBy)) {
         return;
       } else if (!currentNumber.length) {
         setCurrentNumber(prev => prev += '0' + separateFloatBy);
@@ -56,7 +59,7 @@ export function currentInputNumber(store) {
     },
 
     negateKeyHandler() {
-      if (!currentNumber.length || currentNumber === '0' || isItEndOfExpression()) {
+      if (!currentNumber.length || currentNumber === '0' || isEndOfExpression()) {
         return;
       } else if (currentNumber.includes('-')) {
         setCurrentNumber(prev => prev.slice(1));
@@ -66,15 +69,13 @@ export function currentInputNumber(store) {
     },
 
     deleteKeyHandler() {
-      if (isItEndOfExpression()) {
+      if (isEndOfExpression()) {
         return;
       } else if (currentNumber.includes('-') && currentNumber.length === 2) {
         setCurrentNumber('');
       } else {
         setCurrentNumber(prev => prev.slice(0, prev.length - 1));
       }
-      setResult('');
-      setInterimResult('');
     },
 
   };
