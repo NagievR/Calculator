@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useStore } from "./store.js";
 
 // handlers
+import { clearKeyAction } from "../handlers/clear-key-action.js";
 import { currentInputNumber } from '../handlers/current-input-number.js';
 import { mathOperatorsAction } from '../handlers/math-operator-action.js';
 import { equalsKeyAction } from '../handlers/equals-key-action.js'
@@ -12,12 +13,11 @@ export function useHandlersComposition() {
 }
 
 export function HandlersCompositionProvider({ children }) {
-  const { clearStore } = useStore();
-  function clearKeyHandler() {
-    clearStore();
-  }
-
   const store = useStore();
+
+  const {
+    clearKeyHandler,
+  } = clearKeyAction(store);
   
   const {
     numberHandler,
