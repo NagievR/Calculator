@@ -9,6 +9,8 @@ The calculator understands the priority of operators. It means the following:
         2 + 2 * 2 = 6,  not 8
     2 + 2 * 2 * 2 = 10, not 16
 </pre>
+"*", "/" has bigger priority than "-", "+"
+
 <h3>Journal</h3>
 The journal displays the history of calculations and full current expression.
 
