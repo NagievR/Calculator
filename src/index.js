@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 import './index.css';
-import {App} from './app.js';
+import { App } from './app.js';
 
 // providers
 import { StoreProvider } from "./logic/providers/store.js";

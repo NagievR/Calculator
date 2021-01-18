@@ -12,40 +12,18 @@ export function Result() {
     interimResult, 
     result, 
   } = useStore();
-
-  // function defineOutputSource() {
-  //   if (interimResult) {
-  //     let floatCorrected = setVisibleFloatLength(interimResult, 4);
-  //     return formate(floatCorrected, separateFloatBy);
-
-  //   } else if (result) {
-  //     let floatCorrected = setVisibleFloatLength(result);
-  //     return formate(floatCorrected, separateFloatBy);
-
-  //   } else if (currentNumber) {
-  //     return formate(currentNumber, separateFloatBy);
-
-  //   } else {
-  //     return '0';
-  //   }
-  // }
-
   
   function defineOutputSource() {
     if (interimResult) {
       return formate(interimResult, separateFloatBy);
-
     } else if (result) {
       return formate(result, separateFloatBy);
-
     } else if (currentNumber) {
       return formate(currentNumber, separateFloatBy);
-
     } else {
       return '0';
     }
   }
-  
 
   function isInterimResultCheck() {
     return (currentNumber || result) ? '' : styles.intermediate_res;
@@ -74,21 +52,3 @@ function formate(num, separateFloatBy) {
   const formatted = `${intReadable}${separateFloatBy}${float}`;
   return numberStringified.includes(separateFloatBy) ? formatted : intReadable;
 }
-
-// function setVisibleFloatLength(num, maxFloatLength = 4) {
-//   num = String(num);
-
-//   if (Number.isInteger(Number(num))) {
-//     return num;
-//   }
-
-//   let numFixed = Number(num).toFixed(maxFloatLength);
-//   for (let i = numFixed.length-1; i > 2; i--) {
-//     if (numFixed[i] !== '0') {
-//       break;
-//     }
-//     numFixed = numFixed.slice(0, i)
-//   }
-
-//   return numFixed;
-// }

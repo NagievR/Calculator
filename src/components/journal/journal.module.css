@@ -12,7 +12,6 @@
 }
 
 #main_container { 
-  z-index: 999;
   max-height: 95%;
   overflow-y: auto;
   word-wrap: break-word;
@@ -23,6 +22,11 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.result {
+  color: #ffffff;
+  font-weight: 500;
 }
 
 #history_header {
@@ -47,17 +51,15 @@
   background-color: #ebebeb;
 }
 
-
 .history_block {
   font-size: 21px;
   padding: 15px 0 15px 15px;
   border-bottom: solid 1px #494949;
+  transition: 400ms;
 }
 .history_block:first-child {
   border-top: solid 1px #494949;
 }
-
-.result {
-  color: #ffffff;
-  font-weight: 500;
+.history_block:hover {
+  background-color: #3a3939;
 }

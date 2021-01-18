@@ -22,7 +22,7 @@ export function mathOperatorsAction(store) {
   }
 
   function changeOperator(op) {
-    const isSameOperator = op.value === log[log.length - 1];
+    const isSameOperator = (op.value === log[log.length - 1]);
     if (isSameOperator || !log.length) {
       return;
     }

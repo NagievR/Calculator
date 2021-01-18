@@ -40,7 +40,7 @@ function setToFixed(num, maxFloatLength = 6) {
   }
   let fixed = Number(num).toFixed(maxFloatLength);
 
-  // remove all '0's from the end 
+  // remove all '0's from the end after toFixed method
   for (let i = fixed.length-1; i > 2; i--) {
     if (fixed[i] !== '0') {
       break;

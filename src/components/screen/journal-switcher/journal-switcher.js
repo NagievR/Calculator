@@ -50,7 +50,8 @@ export function JournalSwitcher({ switcherDisplaying, setJournalDisplaying }) {
         style={toggleDisplaying()}
         onClick={toggleIcon}
         onFocus={e => e.target.blur()}
-        >{iconToShow}</button>
+        >{iconToShow}
+      </button>
     </div>
   );
 }

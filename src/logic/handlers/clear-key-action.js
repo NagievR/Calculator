@@ -15,7 +15,7 @@ export function clearKeyAction(store) {
 
   return {
     clearKeyHandler() {
-      // add the log to history
+      // add the log to history if needed
       const thereIsUncalculatedPart = log[log.length - 1] !== '=';
       if (log.includes('=') && thereIsUncalculatedPart) {
         addCalculatedPartOnly();

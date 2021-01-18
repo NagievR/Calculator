@@ -10,6 +10,7 @@ export function Key ({ value, className }) {
     <div 
       onClick={() => defineInputType(value)} 
       className={`${styles.key} ${styles[className] ?? ''}`}
-    >{value}</div>
+    >{value}
+    </div>
   );
 }

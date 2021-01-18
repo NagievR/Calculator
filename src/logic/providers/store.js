@@ -6,7 +6,6 @@ export function useStore() {
 }
 
 export function StoreProvider({ children }) {
-  
   const numbersStack = useRef([]);  
   const operatorsStack = useRef([]);
 
